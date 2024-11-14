@@ -70,9 +70,13 @@ target_link_libraries(RaceGame PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 # --- Add Google Test for Unit Testing ---
 # Create an executable for running the tests
 add_executable(run_tests
-        tests/logic/test_car_class.cpp
+        tests/logic/test_racingGame_class.cpp
+        src/RacingGame.cpp
         src/Car.cpp
+        src/CarThread.cpp
         include/Car.h
+        include/CarThread.h
+        include/RacingGame.h
 )
 
 # Link Google Test and Google Test main libraries to the test executable
