@@ -8,39 +8,39 @@ Car::Car() : _xPos(0), _yPos(0), _speed(0), _direction(1)
 Car::~Car()
 {}
 
-void Car::setPosition( int x, int y )
+void Car::setPosition( double x, double y )
 {
     _xPos = x;
     _yPos = y;
 }
 
-void Car::setSpeed ( int speed )
+void Car::setSpeed ( double speed )
 {
-    if (speed < 8 && speed > -8)
+    if (speed < 4 && speed > -4)
         _speed = speed;
 }
 
-void Car::setDirection (int dir )
+void Car::setDirection (double dir )
 {
     _direction = dir;
 }
 
-int Car::getXPosition( void )
+double Car::getXPosition( void )
 {
     return _xPos;
 }
 
-int Car::getYPosition( void )
+double Car::getYPosition( void )
 {
     return _yPos;
 }
 
-int Car::getSpeed( void )
+double Car::getSpeed( void )
 {
     return _speed;
 }
 
-int Car::getDirection( void )
+double Car::getDirection( void )
 {
     return _direction;
 }
@@ -49,11 +49,8 @@ void Car::move()
 {
     double radians = _direction * M_PI / 180.0;
 
-    double stepSize = 1.0;
-
-    // Apply the rotation matrix to calculate the new position
-    double deltaX = _speed * stepSize * cos(radians);
-    double deltaY = _speed * stepSize * sin(radians);
-    _xPos += deltaX;
-    _yPos += deltaY;
+    double deltaX = cos(radians);
+    double deltaY = sin(radians);
+    _xPos += deltaX * _speed;
+    _yPos += deltaY * _speed;
 }

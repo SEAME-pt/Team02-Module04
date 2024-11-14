@@ -22,7 +22,7 @@ private:
   QMutex *_mutex;
 
 signals:
-  void updatePosition( int xPos, int yPos, int dir );
+  void updatePosition( double xPos, double yPos, double dir );
 
 public slots:
   void onAccelerate();

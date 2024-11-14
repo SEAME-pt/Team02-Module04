@@ -3,10 +3,10 @@
 class Car
 {
 private:
-    int _xPos;
-    int _yPos;
-    int _speed;
-    int _direction;
+    double _xPos;
+    double _yPos;
+    double _speed;
+    double _direction;
 
 public:
     Car();
@@ -14,12 +14,12 @@ public:
 
     void move();
     
-    void setPosition( int x , int y );
-    void setSpeed ( int speed );
-    void setDirection (int dir );
+    void setPosition( double x , double y );
+    void setSpeed ( double speed );
+    void setDirection (double dir );
 
-    int getXPosition( void );
-    int getYPosition( void );
-    int getSpeed( void );
-    int getDirection( void );
+    double getXPosition( void );
+    double getYPosition( void );
+    double getSpeed( void );
+    double getDirection( void );
 };

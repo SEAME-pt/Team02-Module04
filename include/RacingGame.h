@@ -53,7 +53,7 @@ signals:
 
 private slots:
     void openGameWindow();
-    void updateGameWindow(int xPos, int yPos, int dir);
+    void updateGameWindow(double xPos, double yPos, double dir);
     void startRace();
     void pauseRace();
     void exitGame();

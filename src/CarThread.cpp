@@ -52,7 +52,7 @@ void::CarThread::onTurnLeft()
 {
     _mutex->lock();
     int dir = _car->getDirection();
-    _car->setDirection(dir - 2);
+    _car->setDirection(dir - 4);
     _mutex->unlock(); 
     msleep(10);
 }
@@ -61,7 +61,7 @@ void::CarThread::onTurnRight()
 {
     _mutex->lock();
     int dir = _car->getDirection();
-    _car->setDirection(dir + 2);
+    _car->setDirection(dir + 4);
     _mutex->unlock(); 
     msleep(10);
 }

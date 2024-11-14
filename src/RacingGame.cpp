@@ -114,7 +114,7 @@ void RacingGame::exitGame()
     }
 }
 
-void RacingGame::updateGameWindow(int xPos, int yPos, int dir)
+void RacingGame::updateGameWindow(double xPos, double yPos, double dir)
 {
     QTransform transform;
     car1->move(xPos, yPos);
