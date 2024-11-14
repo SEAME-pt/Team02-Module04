@@ -32,7 +32,7 @@ body:
       required: true
 
 
-  - type: input
+  - type: textarea
     id: story_reference
     attributes:
       label: Story Reference
