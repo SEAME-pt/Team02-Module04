@@ -47,7 +47,8 @@ void RacingGameTest::initTestCase() {
     carList.append(car1);
     carList.append(car2);
     racingGame = new RacingGame();
-    racingGame->addToCarList(carList);
+    racingGame->addToCarList(car1);
+    racingGame->addToCarList(car2);
 }
 
 void RacingGameTest::cleanupTestCase() {

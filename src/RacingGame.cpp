@@ -97,12 +97,12 @@ void RacingGame::exitGame()
     }
 }
 
-void addToCarList(Car*)
+void RacingGame::addToCarList(Car* car)
 {
-    
+    carList.append(car)
 }
 
-QThread *getThreadList()
+QThread *RacingGame::getThreadList()
 {
-
+    return threadList;
 }
