@@ -5,8 +5,8 @@
 class RaceTrack
 { 
     private:
-        int _size;
-        int _finishLine;
+        int _size = 0;
+        int _finishLine = 0;
 
     public:
         RaceTrack();
