@@ -1,6 +1,57 @@
 #include "../include/RacingGame.h"
+#include "../ui/ui_RacingGame.h"
 
-RacingGame::RacingGame(QWidget *parent){}
+RacingGame::RacingGame(QWidget *parent)
+    : QMainWindow(parent)
+    , ui(new Ui::RacingGame)
+{
+    ui->setupUi(this);
+
+    car1 = ui->car1;
+    car1Pixmap = QPixmap(":/ui/assets/SportCar.png");
+    car1->setPixmap(car1Pixmap);
+
+    car2 = ui->car2;
+    car2Pixmap = QPixmap(":/ui/assets/SportCar.png");
+    car2->setPixmap(car2Pixmap);
+
+    raceTrack = ui->RaceTrack;
+    raceTrackPixmap = QPixmap(":/ui/assets/Race.jpg");
+    raceTrack->setPixmap(raceTrackPixmap);
+
+
+    //example of a button connection to a slot (Object instance, in this case is a button, Signal from the object button, Object instance to connect, slot from the object to receive)
+    // connect(ui->pushButton, &QPushButton::clicked, this, &RacingGame::openMenuWindow);
+}
+
+RacingGame::~RacingGame()
+{
+    delete ui;
+}
+
+void RacingGame::openGameWindow()
+{
+}
+
+void RacingGame::keyPressEvent(QKeyEvent *event)
+{
+    switch (event->key()) {
+        case Qt::Key_W:
+            emit accelerate();
+            break;
+        case Qt::Key_S:
+            emit brake();
+            break;
+        case Qt::Key_A:
+            emit turnLeft();
+            break;
+        case Qt::Key_D:
+            emit turnRight();
+            break;
+        default:
+            QMainWindow::keyPressEvent(event);
+    }
+}
 
 void RacingGame::startRace() 
 {

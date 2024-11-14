@@ -23,7 +23,6 @@ set(PROJECT_RESOURCES
 
 set(PROJECT_SOURCES
         src/main.cpp
-        src/mainwindow.cpp
         src/Car.cpp
         src/CarThread.cpp
         src/RaceTrack.cpp
@@ -31,7 +30,6 @@ set(PROJECT_SOURCES
 )
 
 set(PROJECT_HEADERS
-        include/mainwindow.h
         include/Car.h
         include/CarThread.h
         include/RaceTrack.h
@@ -39,7 +37,7 @@ set(PROJECT_HEADERS
 )
 
 set(PROJECT_UI
-        ui/mainwindow.ui
+        ui/RacingGame.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
