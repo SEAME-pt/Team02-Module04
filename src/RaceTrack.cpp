@@ -18,9 +18,14 @@ void RaceTrack::setHeight(int height)
     this->_height = height;
 }
 
-void RaceTrack::setFinishLine(int finishLine)
+void RaceTrack::setFinishLineX(int finishLineX)
 {
-    _finishLine = finishLine;
+    _finishLineX = finishLineX;
+}
+
+void RaceTrack::setFinishLineY(int finishLineY)
+{
+    _finishLineY = finishLineY;
 }
 
 int RaceTrack::getWidth() const
@@ -33,7 +38,12 @@ int RaceTrack::getHeight() const
     return this->_height;
 }
 
-int RaceTrack::getFinishLine()
+int RaceTrack::getFinishLineX()
 {
-    return _finishLine;
+    return _finishLineX;
+}
+
+int RaceTrack::getFinishLineY()
+{
+    return _finishLineY;
 }

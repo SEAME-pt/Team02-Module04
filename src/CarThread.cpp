@@ -22,11 +22,10 @@ void CarThread::run()
     while (true)
     {
         _mutex->lock();
-        // if (_car->getXPosition() + 100 < width  && _car->getYPosition() < height)
-        _car->move();
+        _car->move(width, height);
         emit updatePosition(_car->getXPosition(), _car->getYPosition(), _car->getDirection(), _car->getPlate());
         _mutex->unlock();
-        msleep(10);
+        msleep(1);
     }
 }
 
@@ -39,7 +38,6 @@ void CarThread::onAccelerate(const std::string& plate)
         _car->setSpeed(speed);
     }
     _mutex->unlock(); 
-    msleep(10);
 }
 
 void CarThread::onBrake(const std::string& plate)
@@ -51,7 +49,6 @@ void CarThread::onBrake(const std::string& plate)
         _car->setSpeed(speed);
     }
     _mutex->unlock(); 
-    msleep(10);
 }
 
 void::CarThread::onTurnLeft(const std::string& plate)
@@ -63,7 +60,6 @@ void::CarThread::onTurnLeft(const std::string& plate)
         _car->setDirection(dir - 4);
     }
     _mutex->unlock(); 
-    msleep(10);
 }
 
 void::CarThread::onTurnRight(const std::string& plate)
@@ -75,5 +71,4 @@ void::CarThread::onTurnRight(const std::string& plate)
         _car->setDirection(dir + 4);
     }
     _mutex->unlock(); 
-    msleep(10);
 }

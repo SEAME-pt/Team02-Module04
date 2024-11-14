@@ -15,7 +15,7 @@ public:
     Car(const std::string &plate);
     ~Car();
 
-    void move();
+    void move(int width, int height);
     
     void setPosition( double x , double y );
     void setSpeed ( double speed );

@@ -78,6 +78,8 @@ void RacingGame::startRace()
     QSize raceTrackSize = ui->RaceTrack->size();
     int raceTrackWidth = raceTrackSize.width();
     int raceTrackHeight = raceTrackSize.height();
+    std::cout << raceTrackWidth << std::endl;
+    std::cout << raceTrackHeight << std::endl;
     
     RaceTrack *raceTrack = new RaceTrack;
     raceTrack->setWidth(raceTrackWidth);

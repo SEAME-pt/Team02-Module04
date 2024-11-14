@@ -16,7 +16,7 @@ void Car::setPosition( double x, double y )
 
 void Car::setSpeed ( double speed )
 {
-    if (speed < 4 && speed > -4)
+    if (speed < 10 && speed > -10)
         _speed = speed;
 }
 
@@ -50,12 +50,22 @@ const std::string& Car::getPlate( void )
     return this->_plate;
 }
 
-void Car::move()
+void Car::move(int width, int height)
 {
     double radians = _direction * M_PI / 180.0;
-
     double deltaX = cos(radians);
     double deltaY = sin(radians);
-    _xPos += deltaX * _speed;
-    _yPos += deltaY * _speed;
+
+    double tempX = _xPos + deltaX * _speed;
+    double tempY = _yPos + deltaY * _speed;
+
+    if (_speed < 0)
+        _speed += 0.01;
+    else if (_speed > 0)
+        _speed -= 0.01;
+    
+    if (tempX > 0 && tempX < width)
+        _xPos = tempX;
+    if (tempY > 0 && tempY < height)
+        _yPos = tempY;
 }

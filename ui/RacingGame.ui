@@ -54,17 +54,14 @@
    <widget class="QLabel" name="car1">
     <property name="geometry">
      <rect>
-      <x>490</x>
-      <y>480</y>
-      <width>101</width>
-      <height>81</height>
+      <x>510</x>
+      <y>340</y>
+      <width>71</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="text">
      <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>assets/SportCar.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -73,17 +70,14 @@
    <widget class="QLabel" name="car2">
     <property name="geometry">
      <rect>
-      <x>440</x>
+      <x>370</x>
       <y>340</y>
-      <width>101</width>
-      <height>81</height>
+      <width>71</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="text">
      <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>assets/SportCar.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -102,6 +96,10 @@
      <string>Pause</string>
     </property>
    </widget>
+   <zorder>RaceTrack</zorder>
+   <zorder>car1</zorder>
+   <zorder>pushButton</zorder>
+   <zorder>car2</zorder>
   </widget>
  </widget>
  <resources/>
