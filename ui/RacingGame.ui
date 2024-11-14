@@ -14,7 +14,6 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-<<<<<<< HEAD
    <widget class="QLabel" name="RaceTrack">
     <property name="geometry">
      <rect>
@@ -84,8 +83,6 @@
      <bool>true</bool>
     </property>
    </widget>
-=======
->>>>>>> origin/22-task-car-changing-orientation-with-left-and-right-arrow-keys-luiza-02
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
@@ -99,13 +96,10 @@
      <string>Pause</string>
     </property>
    </widget>
-<<<<<<< HEAD
    <zorder>RaceTrack</zorder>
    <zorder>car1</zorder>
    <zorder>pushButton</zorder>
-   <zorder>car2</zorder>
-=======
-   <widget class="QGraphicsView" name="graphicsView">
+   <zorder>car2</zorder>   <widget class="QGraphicsView" name="graphicsView">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -115,7 +109,6 @@
      </rect>
     </property>
    </widget>
->>>>>>> origin/22-task-car-changing-orientation-with-left-and-right-arrow-keys-luiza-02
   </widget>
  </widget>
  <resources/>

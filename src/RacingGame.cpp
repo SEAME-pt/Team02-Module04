@@ -35,8 +35,10 @@ RacingGame::RacingGame(QWidget *parent)
     car2->setPos(CAR2_INITIAL_X, CAR2_INITIAL_Y);
     scene->addItem(car2);
 
-    Car* car11 = new Car("a");
-    carList.append(car11);
+    Car* carA = new Car("a");
+    Car* carB = new Car("b");
+    carList.append(carA);
+    carList.append(carB);
 
     startRace();
 }
