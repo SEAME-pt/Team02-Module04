@@ -19,10 +19,18 @@ set(PROJECT_RESOURCES
 set(PROJECT_SOURCES
         src/main.cpp
         src/mainwindow.cpp
+        src/Car.cpp
+        src/CarThread.cpp
+        src/RaceTrack.cpp
+        src/RacingGame.cpp
 )
 
 set(PROJECT_HEADERS
         include/mainwindow.h
+        include/Car.h
+        include/CarThread.h
+        include/RaceTrack.h
+        include/RacingGame.h
 )
 
 set(PROJECT_UI
