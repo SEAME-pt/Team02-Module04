@@ -1,11 +1,13 @@
 #include "../include/CarThread.h"
 #include <QDebug>
 
-CarThread::CarThread(Car *car): _car(car), _mutex(new QMutex()) {}
-
-void CarThread::setRaceTrack( RaceTrack raceT)
+CarThread::CarThread(Car *car): _car(car), _mutex(new QMutex())
 {
-    _raceTrack = new RaceTrack();
+}
+
+void CarThread::setRaceTrack(RaceTrack *raceTrack)
+{
+    _raceTrack = raceTrack;
 }
 
 QMutex *CarThread::getMutex()
@@ -15,9 +17,12 @@ QMutex *CarThread::getMutex()
 
 void CarThread::run()
 {
+    int width = this->_raceTrack->getWidth();
+    int height = this->_raceTrack->getHeight();
     while (true)
     {
         _mutex->lock();
+        // if (_car->getXPosition() + 100 < width  && _car->getYPosition() < height)
         _car->move();
         emit updatePosition(_car->getXPosition(), _car->getYPosition(), _car->getDirection());
         _mutex->unlock();

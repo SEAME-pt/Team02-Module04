@@ -62,6 +62,14 @@ void RacingGame::keyPressEvent(QKeyEvent *event)
 
 void RacingGame::startRace() 
 {
+    QSize raceTrackSize = ui->RaceTrack->size();
+    int raceTrackWidth = raceTrackSize.width();
+    int raceTrackHeight = raceTrackSize.height();
+    
+    RaceTrack *raceTrack = new RaceTrack;
+    raceTrack->setWidth(raceTrackWidth);
+    raceTrack->setHeight(raceTrackHeight);
+
     foreach (Car *car, carList)
     {
         CarThread *carThread = new CarThread(car);
@@ -72,6 +80,7 @@ void RacingGame::startRace()
         connect(carThread, &CarThread::finished, carThread, &CarThread::deleteLater);
     
         threadList.append(carThread);
+        carThread->setRaceTrack(raceTrack);
         carThread->start();
     }
 }

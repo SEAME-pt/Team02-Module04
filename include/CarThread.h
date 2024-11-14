@@ -13,7 +13,7 @@ public:
 
   CarThread(Car *car);
   void run();
-  void setRaceTrack( RaceTrack raceT);
+  void setRaceTrack( RaceTrack *raceTrack);
   QMutex *getMutex();
 
 private:
