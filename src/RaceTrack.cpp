@@ -8,17 +8,29 @@ RaceTrack::RaceTrack()
 RaceTrack::~RaceTrack()
 {}
 
-void RaceTrack::setSize(int size)
+void RaceTrack::setWidth(int width)
 {
-    _size = size;
+    this->_width = width;
 }
+
+void RaceTrack::setHeight(int height)
+{
+    this->_height = height;
+}
+
 void RaceTrack::setFinishLine(int finishLine)
 {
     _finishLine = finishLine;
 }
-int RaceTrack::getSize()
+
+int RaceTrack::getWidth() const
 {
-    return _size;
+    return this->_width;
+}
+
+int RaceTrack::getHeight() const
+{
+    return this->_height;
 }
 
 int RaceTrack::getFinishLine()

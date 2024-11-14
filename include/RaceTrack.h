@@ -5,15 +5,19 @@
 class RaceTrack
 { 
     private:
-        int _size;
+        int _width;
+        int _height;
         int _finishLine;
 
     public:
         RaceTrack();
         ~RaceTrack();
 
-        void setSize(int size);
+        void setWidth(int width);
+        void setHeight(int height);
         void setFinishLine(int finishLine);
-        int getSize();
+
+        int getWidth() const;
+        int getHeight() const;
         int getFinishLine();
 };

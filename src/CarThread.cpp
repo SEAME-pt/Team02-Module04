@@ -1,4 +1,5 @@
 #include "../include/CarThread.h"
+#include <QDebug>
 
 CarThread::CarThread(Car *car): _car(car), _mutex(new QMutex()) {}
 
@@ -27,8 +28,8 @@ void CarThread::run()
 void CarThread::onAccelerate()
 {
     _mutex->lock();
-    int speed = _car->getSpeed();
-    _car->setSpeed(speed + 0.5);
+    int speed = _car->getSpeed() + 1;
+    _car->setSpeed(speed);
     _mutex->unlock(); 
     msleep(10);
 }
@@ -36,8 +37,8 @@ void CarThread::onAccelerate()
 void CarThread::onBrake()
 {
     _mutex->lock();
-    int speed = _car->getSpeed();
-    _car->setSpeed(speed - 0.5);
+    int speed = _car->getSpeed() - 1;
+    _car->setSpeed(speed);
     _mutex->unlock(); 
     msleep(10);
 }

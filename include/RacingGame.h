@@ -47,7 +47,7 @@ protected:
 
 signals:
     void accelerate();
-    void brake();
+    void deaccelerate();
     void turnLeft();
     void turnRight();
 
