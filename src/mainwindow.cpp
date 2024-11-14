@@ -18,7 +18,9 @@ MainWindow::MainWindow(QWidget *parent)
     raceTrack = ui->RaceTrack;
     raceTrackPixmap = QPixmap(":/ui/assets/Race.jpg");
     raceTrack->setPixmap(raceTrackPixmap);
-    connect(ui->pushButton, &QPushButton::clicked, this, &MainWindow::moveAndRotateLabel);
+
+    //exemple of a button connection to a slot (Object instance, in this case is a button, Signal from the object button, Object instance to connect, slot from the object to receive)
+    // connect(ui->pushButton, &QPushButton::clicked, this, &MainWindow::moveAndRotateLabel);
 }
 
 MainWindow::~MainWindow()
