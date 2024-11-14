@@ -19,15 +19,15 @@ RacingGame::RacingGame(QWidget *parent)
     raceTrackPixmap = QPixmap(":/ui/assets/Race.jpg");
     raceTrack->setPixmap(raceTrackPixmap);
 
-    Car car11 = new Car;
-    Car car22 = new Car;
+    Car* car11 = new Car;
+    Car* car22 = new Car;
 
     carList.append(car11);
     carList.append(car22);
 
+    this->startRace();
     //example of a button connection to a slot (Object instance, in this case is a button, Signal from the object button, Object instance to connect, slot from the object to receive)
     // connect(ui->pushButton, &QPushButton::clicked, this, &RacingGame::openMenuWindow);
-    connect(this, &RacingGame::accelerate, this, &RacingGame::openMenuWindow);
 }
 
 RacingGame::~RacingGame()
@@ -61,7 +61,6 @@ void RacingGame::keyPressEvent(QKeyEvent *event)
 
 void RacingGame::startRace() 
 {
-    // Create a new thread for each car and start the threads
     foreach (Car *car, carList)
     {
         QThread *thread = new QThread();
