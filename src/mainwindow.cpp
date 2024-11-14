@@ -8,11 +8,17 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     car1 = ui->car1;
-    originalPixmap = QPixmap(":/ui/assets/SportCar.png");
-    car1->setPixmap(originalPixmap);
-    connect(ui->pushButton, &QPushButton::clicked, this, &MainWindow::moveAndRotateLabel);
-    //connect(this, &MainWindow::accelerate, this, &CarThread::onAccelerate);
+    car1Pixmap = QPixmap(":/ui/assets/SportCar.png");
+    car1->setPixmap(car1Pixmap);
 
+    car2 = ui->car2;
+    car2Pixmap = QPixmap(":/ui/assets/SportCar.png");
+    car2->setPixmap(car2Pixmap);
+
+    raceTrack = ui->RaceTrack;
+    raceTrackPixmap = QPixmap(":/ui/assets/Race.jpg");
+    raceTrack->setPixmap(raceTrackPixmap);
+    connect(ui->pushButton, &QPushButton::clicked, this, &MainWindow::moveAndRotateLabel);
 }
 
 MainWindow::~MainWindow()
@@ -30,7 +36,7 @@ void MainWindow::moveAndRotateLabel()
     // Rotate the QLabel
     QTransform transform;
     transform.rotate(45); // Rotate by 45 degrees
-    car1->setPixmap(originalPixmap.transformed(transform));
+    car1->setPixmap(car1Pixmap.transformed(transform));
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event)

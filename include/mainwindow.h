@@ -27,7 +27,10 @@ private:
     Ui::MainWindow *ui;
     QLabel *car1;
     QLabel *car2;
-    QPixmap originalPixmap;
+    QLabel *raceTrack;
+    QPixmap car1Pixmap;
+    QPixmap car2Pixmap;
+    QPixmap raceTrackPixmap;
 
 protected:
     void keyPressEvent(QKeyEvent *event) override;
