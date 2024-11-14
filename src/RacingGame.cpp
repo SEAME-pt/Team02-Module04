@@ -1,5 +1,7 @@
 #include "../include/RacingGame.h"
 #include "../ui/ui_RacingGame.h"
+#include "../include/CarThread.h"
+#include <iostream>
 
 RacingGame::RacingGame(QWidget *parent)
     : QMainWindow(parent)
@@ -25,7 +27,7 @@ RacingGame::RacingGame(QWidget *parent)
     carList.append(car11);
     // carList.append(car22);
 
-    connect(ui->pushButton, &QPushButton::clicked, this, &RacingGame::accelerate);
+    //connect(ui->pushButton, &QPushButton::clicked, this, &RacingGame::accelerate);
     this->startRace();
     //example of a button connection to a slot (Object instance, in this case is a button, Signal from the object button, Object instance to connect, slot from the object to receive)
 }
@@ -73,6 +75,10 @@ void RacingGame::startRace()
         connect(carThread, &CarThread::finished, carThread, &CarThread::deleteLater);
         // connect(thread, &QThread::finished, thread, &QThread::deleteLater);
     
+        connect(this, &RacingGame::turnRight, carThread, &CarThread::onTurnRight);
+        connect(this, &RacingGame::turnLeft, carThread, &CarThread::onTurnLeft);
+
+        connect(carThread, &CarThread::updatePosition, this, &RacingGame::updateGameWindow);
         threadList.append(carThread);
         carThread->start();
     }
@@ -107,6 +113,7 @@ void RacingGame::updateGameWindow(int xPos, int yPos, int dir)
     QTransform transform;
     car1->move(xPos, yPos);
 
+    //std::cout << "X: " << xPos << " Y: " << yPos << " Dir: " << dir << std::endl;
     transform.rotate(dir);
     car1->setPixmap(car1Pixmap.transformed(transform));
 }
