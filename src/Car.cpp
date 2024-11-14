@@ -50,5 +50,5 @@ void Car::move()
     _yPos += _speed * sin(_direction * 3.14);
 
 
-    emit positionChanged(_xPos, _yPos);
+    emit positionChanged(_speed, _direction);
 }

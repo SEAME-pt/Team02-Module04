@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     originalPixmap = QPixmap(":/ui/assets/SportCar.png");
     car1->setPixmap(originalPixmap);
     connect(ui->pushButton, &QPushButton::clicked, this, &MainWindow::moveAndRotateLabel);
+    //connect(this, &MainWindow::accelerate, this, &CarThread::onAccelerate);
 
 }
 
@@ -30,4 +31,24 @@ void MainWindow::moveAndRotateLabel()
     QTransform transform;
     transform.rotate(45); // Rotate by 45 degrees
     car1->setPixmap(originalPixmap.transformed(transform));
+}
+
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+    switch (event->key()) {
+        case Qt::Key_W:
+            emit accelerate();
+            break;
+        case Qt::Key_S:
+            emit brake();
+            break;
+        case Qt::Key_A:
+            emit turnLeft();
+            break;
+        case Qt::Key_D:
+            emit turnRight();
+            break;
+        default:
+            QMainWindow::keyPressEvent(event);
+    }
 }

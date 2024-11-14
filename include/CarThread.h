@@ -22,5 +22,9 @@ class CarThread : public QThread {
     QMutex *_mutex;
 
   public slots:
-    void updatePosition();
+    void updatePosition( int speed, int dir );
+    // void onAccelerate();
+    // void onBrake();
+    // void onTurnLeft();
+    // void onTurnRight();
 };

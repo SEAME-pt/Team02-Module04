@@ -29,6 +29,15 @@ private:
     QLabel *car2;
     QPixmap originalPixmap;
 
+protected:
+    void keyPressEvent(QKeyEvent *event) override;
+
+signals:
+    void accelerate();
+    void brake();
+    void turnLeft();
+    void turnRight();
+
 private slots:
     void moveAndRotateLabel();
 };
