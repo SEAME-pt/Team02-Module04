@@ -1,5 +1,6 @@
 
 #include "../include/Car.h"
+#include <math.h>
 
 Car::Car(QObject *parent)
 {}
@@ -7,9 +8,10 @@ Car::Car(QObject *parent)
 Car::~Car()
 {}
 
-void Car::setPosition( int pos )
+void Car::setPosition( int x, int y )
 {
-    _position = pos;
+    _xPos = x;
+    _yPos = y;
 }
 
 void Car::setSpeed ( int speed )
@@ -22,9 +24,14 @@ void Car::setDirection (int dir )
     _direction = dir;
 }
 
-int Car::getPosition( void )
+int Car::getXPosition( void )
 {
-    return _position;
+    return _xPos;
+}
+
+int Car::getYPosition( void )
+{
+    return _yPos;
 }
 
 int Car::getSpeed( void )
@@ -39,6 +46,9 @@ int Car::getDirection( void )
 
 void Car::move()
 {
-    _position += _speed * _direction;
-    emit positionChanged(_position);
+    _xPos += _speed * cos(_direction * 3.14);
+    _yPos += _speed * sin(_direction * 3.14);
+
+
+    emit positionChanged(_xPos, _yPos);
 }
