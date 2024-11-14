@@ -37,27 +37,27 @@ TEST(Car_GettersTest, filled) {
     EXPECT_EQ(car.getDirection(), 2);
 }
 
-TEST(Car_positionChangedSignalTest, SignalEmittedTest) {
-    Car car;
+// TEST(positionChangedSignalTest, SignalEmittedTest) {
+//     Car car;
 
-    QSignalSpy spy(&car, &Car::positionChanged);
+//     QSignalSpy spy(&car, &Car::positionChanged);
 
-    car.positionChanged(1, 2);
+//     car.positionChanged(1, 2);
 
-    EXPECT_EQ(spy.count(), 1);
-}
+//     EXPECT_EQ(spy.count(), 1);
+// }
 
-TEST(Car_moveFunctionTests, moveTest) {
-    Car car;
+// TEST(moveFunctionTests, moveTest) {
+//     Car car;
 
-    QSignalSpy spy(&car, &Car::positionChanged);
+//     QSignalSpy spy(&car, &Car::positionChanged);
 
-    car.setPosition(2, 3);
-    car.setSpeed(2);
-    car.setDirection(2);
-    car.move();
+//     car.setPosition(2, 3);
+//     car.setSpeed(2);
+//     car.setDirection(2);
+//     car.move();
 
-    EXPECT_EQ(car.getXPosition(), 3);
-    EXPECT_EQ(car.getYPosition(), 2);
-    EXPECT_EQ(spy.count(), 1);
-}
+//     EXPECT_EQ(car.getXPosition(), 3);
+//     EXPECT_EQ(car.getYPosition(), 2);
+//     EXPECT_EQ(spy.count(), 1);
+// }

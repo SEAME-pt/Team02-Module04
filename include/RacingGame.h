@@ -50,7 +50,7 @@ protected:
 
 signals:
     void accelerate();
-    void brake();
+    void deaccelerate();
     void turnLeft();
     void turnRight();
 
@@ -59,9 +59,10 @@ public slots:
 
 protected slots:
     void openGameWindow();
+    void updateGameWindow(int xPos, int yPos, int dir);
     void startRace();
     void pauseRace();
     void exitGame();
-    void unpauseRace();    
+    void unpauseRace();
 };
 #endif // RACINGGAME_H

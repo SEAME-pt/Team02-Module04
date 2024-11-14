@@ -1,5 +1,7 @@
 #include "../include/RacingGame.h"
 #include "../ui/ui_RacingGame.h"
+#include "../include/CarThread.h"
+#include <iostream>
 
 RacingGame::RacingGame(QWidget *parent)
     : QMainWindow(parent)
@@ -19,9 +21,15 @@ RacingGame::RacingGame(QWidget *parent)
     raceTrackPixmap = QPixmap(":/ui/assets/Race.jpg");
     raceTrack->setPixmap(raceTrackPixmap);
 
+    Car* car11 = new Car;
+    // Car* car22 = new Car;
 
+    carList.append(car11);
+    // carList.append(car22);
+
+    //connect(ui->pushButton, &QPushButton::clicked, this, &RacingGame::accelerate);
+    this->startRace();
     //example of a button connection to a slot (Object instance, in this case is a button, Signal from the object button, Object instance to connect, slot from the object to receive)
-    // connect(ui->pushButton, &QPushButton::clicked, this, &RacingGame::openMenuWindow);
 }
 
 RacingGame::~RacingGame()
@@ -33,6 +41,7 @@ RacingGame::~RacingGame()
 
 void RacingGame::openGameWindow()
 {
+    emit accelerate();
 }
 
 void RacingGame::keyPressEvent(QKeyEvent *event)
@@ -42,7 +51,7 @@ void RacingGame::keyPressEvent(QKeyEvent *event)
             emit accelerate();
             break;
         case Qt::Key_S:
-            emit brake();
+            emit deaccelerate();
             break;
         case Qt::Key_A:
             emit turnLeft();
@@ -57,20 +66,28 @@ void RacingGame::keyPressEvent(QKeyEvent *event)
 
 void RacingGame::startRace() 
 {
-    // Create a new thread for each car and start the threads
+    QSize raceTrackSize = ui->RaceTrack->size();
+    int raceTrackWidth = raceTrackSize.width();
+    int raceTrackHeight = raceTrackSize.height();
+    
+    RaceTrack *raceTrack = new RaceTrack;
+    raceTrack->setWidth(raceTrackWidth);
+    raceTrack->setHeight(raceTrackHeight);
+
     foreach (Car *car, carList)
     {
-        // QThread *thread = new QThread();
         CarThread *carThread = new CarThread(car);
-        // carThread->moveToThread(thread);
     
-        // connect(car, &Car::positionChanged, carThread, &CarThread::updatePosition);
-        // connect(thread, &QThread::started, carThread, &CarThread::run);
-        // connect(carThread, &CarThread::finished, thread, &QThread::quit);
+        connect(this, &RacingGame::accelerate, carThread, &CarThread::onAccelerate);
+        connect(this, &RacingGame::deaccelerate, carThread, &CarThread::onBrake);
+        connect(this, &RacingGame::turnRight, carThread, &CarThread::onTurnRight);
+        connect(this, &RacingGame::turnLeft, carThread, &CarThread::onTurnLeft);
+
+        connect(carThread, &CarThread::updatePosition, this, &RacingGame::updateGameWindow);
         connect(carThread, &CarThread::finished, carThread, &CarThread::deleteLater);
-        // connect(thread, &QThread::finished, thread, &QThread::deleteLater);
     
         threadList.append(carThread);
+        carThread->setRaceTrack(raceTrack);
         carThread->start();
     }
 }
@@ -97,6 +114,24 @@ void RacingGame::exitGame()
     {
         delete (thread->findChild<CarThread *>()->getMutex());
     }
+}
+
+void RacingGame::updateGameWindow(int xPos, int yPos, int dir)
+{
+    QTransform transform;
+    car1->move(xPos, yPos);
+
+    transform.rotate(dir);
+    car1->setPixmap(car1Pixmap.transformed(transform));
+}
+
+void RacingGame::updateGameWindow(int xPos, int yPos, int dir)
+{
+    QTransform transform;
+    car1->move(xPos, yPos);
+
+    transform.rotate(dir);
+    car1->setPixmap(car1Pixmap.transformed(transform));
 }
 
 void RacingGame::addToCarList(Car* car)

@@ -6,29 +6,27 @@
 #include "RaceTrack.h"
 #include "Car.h"
 
-class CarThread : public QThread {
-
+class CarThread : public QThread 
+{
   Q_OBJECT
-  public:
+public:
 
-    CarThread(Car *car);
-    void run();
-    void setRaceTrack( RaceTrack *raceT);
-    QMutex *getMutex();
-    Car * getCar();
+  CarThread(Car *car);
+  void run();
+  void setRaceTrack( RaceTrack *raceTrack);
+  QMutex *getMutex();
 
-  protected:
-    Car *_car;
-    RaceTrack *_raceTrack;
-    QMutex *_mutex;
-  
-  signals:
-    void finished();
+private:
+  Car *_car;
+  RaceTrack *_raceTrack;
+  QMutex *_mutex;
 
-  public slots:
-    virtual void updatePosition( int speed, int dir );
-    // void onAccelerate();
-    // void onBrake();
-    // void onTurnLeft();
-    // void onTurnRight();
+signals:
+  void updatePosition( int xPos, int yPos, int dir );
+
+public slots:
+  void onAccelerate();
+  void onBrake();
+  void onTurnLeft();
+  void onTurnRight();
 };
