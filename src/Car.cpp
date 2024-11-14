@@ -56,16 +56,19 @@ void Car::move(int width, int height)
     double deltaX = cos(radians);
     double deltaY = sin(radians);
 
-    double tempX = _xPos + deltaX * _speed;
-    double tempY = _yPos + deltaY * _speed;
+    double tempX = _xPos; 
+    double tempY = _yPos;
+
+    _xPos += deltaX * _speed;
+    _yPos += deltaY * _speed;
 
     if (_speed < 0)
         _speed += 0.01;
     else if (_speed > 0)
         _speed -= 0.01;
     
-    if (tempX > 0 && tempX < width)
+    if (_xPos < 0 || _xPos > width)
         _xPos = tempX;
-    if (tempY > 0 && tempY < height)
+    if (_yPos < 0 || _yPos > height)
         _yPos = tempY;
 }

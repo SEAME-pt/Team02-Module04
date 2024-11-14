@@ -51,7 +51,7 @@ void CarThread::onBrake(const std::string& plate)
     _mutex->unlock(); 
 }
 
-void::CarThread::onTurnLeft(const std::string& plate)
+void CarThread::onTurnLeft(const std::string& plate)
 {
     _mutex->lock();
     if (_car->getPlate() == plate)
