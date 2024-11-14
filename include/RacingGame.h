@@ -10,6 +10,8 @@
 #include <QGraphicsView>
 #include <QList>
 #include <QMutex>
+#include <QSet>
+#include <QKeyEvent>
 #include <QThread>
 #include "RaceTrack.h"
 #include "Car.h"
@@ -41,9 +43,11 @@ private:
     QList<Car*> carList;
     QList<QThread*> threadList;
     RaceTrack *raceTrackPtr;
+    QSet<int> pressedKeys; // Add this line
 
 protected:
     void keyPressEvent(QKeyEvent *event) override;
+    void keyReleaseEvent(QKeyEvent *event) override;
 
 signals:
     void accelerate(const std::string& plate);

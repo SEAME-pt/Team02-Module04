@@ -41,36 +41,71 @@ void RacingGame::openGameWindow()
 {
 }
 
+// void RacingGame::keyPressEvent(QKeyEvent *event)
+// {
+//     switch (event->key()) {
+//         case Qt::Key_W:
+//             emit accelerate("a");
+//             break;
+//         case Qt::Key_S:
+//             emit deaccelerate("a");
+//             break;
+//         case Qt::Key_A:
+//             emit turnLeft("a");
+//             break;
+//         case Qt::Key_D:
+//             emit turnRight("a");
+//             break;
+//         case Qt::Key_I:
+//             emit accelerate("b");
+//             break;
+//         case Qt::Key_K:
+//             emit deaccelerate("b");
+//             break;
+//         case Qt::Key_J:
+//             emit turnLeft("b");
+//             break;
+//         case Qt::Key_L:
+//             emit turnRight("b");
+//             break;
+//         default:
+//             QMainWindow::keyPressEvent(event);
+//     }
+// }
+
 void RacingGame::keyPressEvent(QKeyEvent *event)
 {
-    switch (event->key()) {
-        case Qt::Key_W:
-            emit accelerate("a");
-            break;
-        case Qt::Key_S:
-            emit deaccelerate("a");
-            break;
-        case Qt::Key_A:
-            emit turnLeft("a");
-            break;
-        case Qt::Key_D:
-            emit turnRight("a");
-            break;
-        case Qt::Key_I:
-            emit accelerate("b");
-            break;
-        case Qt::Key_K:
-            emit deaccelerate("b");
-            break;
-        case Qt::Key_J:
-            emit turnLeft("b");
-            break;
-        case Qt::Key_L:
-            emit turnRight("b");
-            break;
-        default:
-            QMainWindow::keyPressEvent(event);
+    pressedKeys.insert(event->key()); // Add the key to the set of pressed keys
+
+    if (pressedKeys.contains(Qt::Key_W)) {
+        emit accelerate("a");
     }
+    if (pressedKeys.contains(Qt::Key_S)) {
+        emit deaccelerate("a");
+    }
+    if (pressedKeys.contains(Qt::Key_A)) {
+        emit turnLeft("a");
+    }
+    if (pressedKeys.contains(Qt::Key_D)) {
+        emit turnRight("a");
+    }
+    if (pressedKeys.contains(Qt::Key_I)) {
+        emit accelerate("b");
+    }
+    if (pressedKeys.contains(Qt::Key_K)) {
+        emit deaccelerate("b");
+    }
+    if (pressedKeys.contains(Qt::Key_J)) {
+        emit turnLeft("b");
+    }
+    if (pressedKeys.contains(Qt::Key_L)) {
+        emit turnRight("b");
+    }
+}
+
+void RacingGame::keyReleaseEvent(QKeyEvent *event)
+{
+    pressedKeys.remove(event->key());
 }
 
 void RacingGame::startRace() 

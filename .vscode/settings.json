@@ -6,6 +6,7 @@
     "fstream": "cpp",
     "qtransform": "cpp",
     "qgraphicsscene": "cpp",
-    "new": "cpp"
+    "new": "cpp",
+    "qlist": "cpp"
   }
 }
