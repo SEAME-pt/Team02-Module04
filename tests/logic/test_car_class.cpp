@@ -2,7 +2,7 @@
 #include <QSignalSpy>
 #include "../../include/Car.h"
 
-TEST(GettersTest, empty) {
+TEST(Car_GettersTest, empty) {
     Car car;
     
     EXPECT_EQ(car.getXPosition(), 0);
@@ -11,15 +11,20 @@ TEST(GettersTest, empty) {
     EXPECT_EQ(car.getDirection(), 0);
 }
 
-TEST(SettersTest, filled) {
+TEST(Car_SettersTest, filled) {
     Car car;
 
     car.setPosition(2, 3);
     car.setSpeed(2);
     car.setDirection(2);
+
+    EXPECT_EQ(car.getXPosition(), 2);
+    EXPECT_EQ(car.getYPosition(), 3);
+    EXPECT_EQ(car.getSpeed(), 2);
+    EXPECT_EQ(car.getDirection(), 2);
 }
 
-TEST(GettersTest, filled) {
+TEST(Car_GettersTest, filled) {
     Car car;
 
     car.setPosition(2, 3);
@@ -32,7 +37,7 @@ TEST(GettersTest, filled) {
     EXPECT_EQ(car.getDirection(), 2);
 }
 
-TEST(positionChangedSignalTest, SignalEmittedTest) {
+TEST(Car_positionChangedSignalTest, SignalEmittedTest) {
     Car car;
 
     QSignalSpy spy(&car, &Car::positionChanged);
@@ -42,7 +47,7 @@ TEST(positionChangedSignalTest, SignalEmittedTest) {
     EXPECT_EQ(spy.count(), 1);
 }
 
-TEST(moveFunctionTests, moveTest) {
+TEST(Car_moveFunctionTests, moveTest) {
     Car car;
 
     QSignalSpy spy(&car, &Car::positionChanged);
