@@ -71,4 +71,15 @@ void CarThread::onTurnRight(const std::string& plate)
         _car->setDirection(dir + 4);
     }
     _mutex->unlock(); 
+    msleep(10);
+}
+
+Car *CarThread::getCar( void )
+{
+    return _car;
+}
+
+RaceTrack *CarThread::getRaceTrack( void )
+{
+    return _raceTrack;
 }

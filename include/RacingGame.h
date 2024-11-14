@@ -37,6 +37,8 @@ class RacingGame : public QMainWindow
 public:
     RacingGame(QWidget *parent = nullptr);
     ~RacingGame();
+    void addToCarList(Car*);
+    QList <QThread *>getThreadList();
 
 private:
     Ui::RacingGame *ui;
@@ -47,6 +49,7 @@ private:
     QPixmap car2Pixmap;
     QPixmap raceTrackPixmap;
 
+protected:
     QList<Car*> carList;
     QList<QThread*> threadList;
     RaceTrack *raceTrackPtr;
@@ -62,7 +65,7 @@ signals:
     void turnLeft(const std::string& plate);
     void turnRight(const std::string& plate);
 
-private slots:
+protected slots:
     void openGameWindow();
     void updateGameWindow(double xPos, double yPos, double dir, const std::string &plate);
     void startRace();
