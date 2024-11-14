@@ -16,7 +16,7 @@ class Car:  public QObject
         Car(QObject *parent = nullptr);
         ~Car();
 
-        void move();
+        virtual void move();
         
         void setPosition( int x , int y );
         void setSpeed ( int speed );

@@ -12,6 +12,11 @@ QMutex *CarThread::getMutex()
     return _mutex;
 }
 
+Car *CarThread::getCar()
+{
+    return _car;
+}
+
 void CarThread::run()
 {
     // while (_car->getPosition() < _raceTrack->getFinishLine())

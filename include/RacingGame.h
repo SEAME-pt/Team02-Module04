@@ -12,7 +12,8 @@ class RacingGame : public QMainWindow {
   public:
   
     RacingGame(QWidget *parent = 0);
-    
+    void addToCarList(Car*);
+    QThread *getThreadList();
 
   private slots:
     void startRace();

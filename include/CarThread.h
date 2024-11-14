@@ -15,14 +15,18 @@ class CarThread : public QThread {
     void run();
     void setRaceTrack( RaceTrack raceT);
     QMutex *getMutex();
+    Car * getCar();
 
-  private:
+  protected:
     Car *_car;
     RaceTrack *_raceTrack;
     QMutex *_mutex;
+  
+  signals:
+    void finished();
 
   public slots:
-    void updatePosition( int speed, int dir );
+    virtual void updatePosition( int speed, int dir );
     // void onAccelerate();
     // void onBrake();
     // void onTurnLeft();

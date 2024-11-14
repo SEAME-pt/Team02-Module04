@@ -46,3 +46,12 @@ void RacingGame::exitGame()
     }
 }
 
+void addToCarList(Car*)
+{
+    
+}
+
+QThread *getThreadList()
+{
+
+}
