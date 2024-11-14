@@ -2,7 +2,7 @@
 #include "../include/Car.h"
 #include <math.h>
 
-Car::Car(QObject *parent)
+Car::Car(QObject *parent) : _xPos(0), _yPos(0), _speed(0), _direction(0)
 {}
 
 Car::~Car()
