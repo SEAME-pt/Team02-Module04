@@ -13,7 +13,7 @@ class CarThread : public QThread {
 
     CarThread(Car *car);
     void run();
-    void setRaceTrack( RaceTrack raceT);
+    void setRaceTrack( RaceTrack *raceT);
     QMutex *getMutex();
     Car * getCar();
 

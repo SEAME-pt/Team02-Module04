@@ -29,7 +29,7 @@ public:
     RacingGame(QWidget *parent = nullptr);
     ~RacingGame();
     void addToCarList(Car*);
-    QThread *getThreadList();
+    QList <QThread *>getThreadList();
 
 private:
     Ui::RacingGame *ui;
@@ -40,6 +40,7 @@ private:
     QPixmap car2Pixmap;
     QPixmap raceTrackPixmap;
 
+protected:
     QList<Car*> carList;
     QList<QThread*> threadList;
     RaceTrack *raceTrackPtr;
@@ -53,7 +54,10 @@ signals:
     void turnLeft();
     void turnRight();
 
-private slots:
+public slots:
+
+
+protected slots:
     void openGameWindow();
     void startRace();
     void pauseRace();

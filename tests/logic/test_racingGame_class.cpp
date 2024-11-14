@@ -3,6 +3,7 @@
 #include "../../include/RacingGame.h"
 #include "../../include/Car.h"
 #include "../../include/CarThread.h"
+#include <QSignalSpy>
 
 
 class MockCar : public Car {
@@ -15,53 +16,70 @@ class MockCarThread : public CarThread {
 public:
     MockCarThread(Car *car) : CarThread(car) {}
     void run() override {
-        while (_car->getXPosition() < _raceTrack->getFinishLine()) {
             getMutex()->lock();
             _car->move();
             _mutex->unlock();
             msleep(10);
-        }
         emit finished();
     }
-    void updatePosition(int speed, int dir) override {}
 };
 
-class RacingGameTest : public QObject {
+class RacingGameTest : public RacingGame {
     Q_OBJECT
+
+signals:
+    void testSignal();
 
 private slots:
     void initTestCase();
     void cleanupTestCase();
     void testStartRace();
+    void testConstructor();
 
 private:
     RacingGame *racingGame;
-    QList<Car *> carList;
-    MockCar *car1;
-    MockCar *car2;
+
 };
 
 void RacingGameTest::initTestCase() {
-    car1 = new MockCar();
-    car2 = new MockCar();
+    MockCar *car1 = new MockCar();
+    MockCar *car2 = new MockCar();
     carList.append(car1);
     carList.append(car2);
     racingGame = new RacingGame();
-    racingGame->addToCarList(car1);
-    racingGame->addToCarList(car2);
+
 }
 
 void RacingGameTest::cleanupTestCase() {
+    
+    threadList[0]->terminate();
+    threadList[1]->terminate();
     delete racingGame;
-    delete car1;
-    delete car2;
+
 }
 
 void RacingGameTest::testStartRace() {
-    QCOMPARE(racingGame->getThreadList().size(), 2);
-    for (QThread *thread : racingGame->getThreadList()) {
+    startRace();
+    QCOMPARE(getThreadList().size(), 2);
+    for (QThread *thread : getThreadList()) {
         QVERIFY(thread->isRunning());
     }
+}
+
+void RacingGameTest::testConstructor() {
+    // Verify that the UI elements are initialized
+    QVERIFY(racingGame->findChild<QLabel*>("car1") != nullptr);
+    QVERIFY(racingGame->findChild<QLabel*>("car2") != nullptr);
+    QVERIFY(racingGame->findChild<QLabel*>("RaceTrack") != nullptr);
+
+    // Verify that the pixmaps are set correctly
+    QLabel *car1 = racingGame->findChild<QLabel*>("car1");
+    QLabel *car2 = racingGame->findChild<QLabel*>("car2");
+    QLabel *raceTrack = racingGame->findChild<QLabel*>("RaceTrack");
+
+    QVERIFY(!car1->pixmap().isNull());
+    QVERIFY(!car2->pixmap().isNull());
+    QVERIFY(!raceTrack->pixmap().isNull());
 }
 
 QTEST_MAIN(RacingGameTest)

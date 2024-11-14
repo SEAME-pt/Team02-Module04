@@ -5,6 +5,7 @@
     "*.tcc": "cpp",
     "fstream": "cpp",
     "qtransform": "cpp",
-    "qgraphicsscene": "cpp"
+    "qgraphicsscene": "cpp",
+    "new": "cpp"
   }
 }

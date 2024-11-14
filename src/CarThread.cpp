@@ -2,9 +2,9 @@
 
 CarThread::CarThread(Car *car): _car(car), QThread(car){}
 
-void CarThread::setRaceTrack( RaceTrack raceT)
+void CarThread::setRaceTrack( RaceTrack *raceT)
 {
-    _raceTrack = new RaceTrack();
+    _raceTrack = raceT;
 }
 
 QMutex *CarThread::getMutex()
