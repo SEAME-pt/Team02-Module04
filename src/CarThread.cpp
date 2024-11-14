@@ -21,3 +21,6 @@ void CarThread::run()
         msleep(10); // Wait 10 milliseconds before moving again
     }
 }
+
+void CarThread::updatePosition()
+{}

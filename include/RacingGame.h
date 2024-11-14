@@ -12,13 +12,13 @@ class RacingGame : public QMainWindow {
   public:
   
     RacingGame(QWidget *parent = 0);
-    void RacingGame::unpauseRace();
     
 
   private slots:
     void startRace();
     void pauseRace();
     void exitGame();
+    void unpauseRace();
 
   private:
     RaceTrack *raceTrack;

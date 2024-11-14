@@ -7,6 +7,8 @@
 #include "Car.h"
 
 class CarThread : public QThread {
+
+  Q_OBJECT
   public:
 
     CarThread(Car *car);
