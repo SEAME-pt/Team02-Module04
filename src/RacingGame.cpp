@@ -175,13 +175,13 @@ void RacingGame::updateGameWindow(double xPos, double yPos, double dir, const st
 {
     if (plate == "a")
     {
-        car1->move(xPos, yPos);
-        car1->setPos(dir);
+        car1->setPos(xPos, yPos);
+        car1->setRotation(dir);
     }
     else
     {
-        car2->move(xPos, yPos);
-        car2->setPos(dir);
+        car2->setPos(xPos, yPos);
+        car2->setRotation(dir);
     }
 }
 
