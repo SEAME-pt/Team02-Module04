@@ -13,7 +13,14 @@
 #include <QThread>
 #include "RaceTrack.h"
 #include "Car.h"
-#include "CarThread.h"
+
+#define CAR_WIDTH 100
+#define CAR_HEIGHT 150
+
+#define CAR1_INITIAL_X 200
+#define CAR1_INITIAL_Y 300
+#define CAR2_INITIAL_X 300
+#define CAR2_INITIAL_Y 300
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -31,9 +38,9 @@ public:
 
 private:
     Ui::RacingGame *ui;
-    QLabel *car1;
-    QLabel *car2;
-    QLabel *raceTrack;
+    QGraphicsPixmapItem *car1;
+    QGraphicsPixmapItem *car2;
+    QGraphicsPixmapItem *raceTrack;
     QPixmap car1Pixmap;
     QPixmap car2Pixmap;
     QPixmap raceTrackPixmap;
