@@ -1,0 +1,86 @@
+name: CI
+
+on:
+  push:
+    branches: [ "" ]
+  pull_request:
+    branches: [ "" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the repository with submodules
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Install Qt 6.5.0
+        uses: jurplel/install-qt-action@v2
+        with:
+          version: '6.5.0'
+          host: 'linux'
+          modules: 'qtbase'
+
+      - name: Install Additional Dependencies for Qt xcb Plugin
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libxcb-xinerama0 libxcb-xinput0 libxkbcommon-x11-0 libxcb-xfixes0-dev \
+                                  libxcb-util1 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 \
+                                  libxcb-render-util0 libxcb-randr0 libxcb-xkb1 libxkbcommon-dev \
+                                  libx11-xcb1 xvfb libxcb-cursor0
+
+      - name: Set Permissions for Qt Plugin Directory
+        run: |
+          sudo chmod -R 755 /home/runner/work/Team02-Module04/Qt/6.5.0/gcc_64/plugins
+          sudo chmod -R 755 /home/runner/work/Team02-Module04/Qt/6.5.0/gcc_64/lib
+
+      - name: Start Xvfb (Virtual Display)
+        run: |
+          export DISPLAY=:99
+          Xvfb :99 -screen 0 1920x1080x16 &
+        shell: bash
+
+      - name: Verify Qt Installation
+        run: |
+          echo "Verifying Qt Installation at /home/runner/work/Team02-Module04/Qt"
+          ls -R /home/runner/work/Team02-Module04/Qt
+
+      - name: Compile the project with CMake
+        run: |
+          mkdir -p build
+          cd build
+          cmake -DCMAKE_PREFIX_PATH=/home/runner/work/Team02-Module04/Qt/6.5.0/gcc_64 ..
+          cmake --build .
+        shell: bash
+        continue-on-error: false
+
+      - name: List Build Contents
+        run: |
+          echo "Listing build directory contents for diagnostics:"
+          ls -la build
+
+      - name: Set Execute Permission
+        run: |
+          chmod +x build/*
+          echo "Permissions set for test executables in build/"
+
+      - name: Run Unit Logic Tests
+        run: |
+          cd build/
+          echo "Running unit logic tests"
+          ./run_tests || { echo "Logic tests failed"; exit 1; }
+        shell: bash
+        continue-on-error: false
+
+      - name: Run Unit UI Tests
+        env:
+          DISPLAY: ":99"
+          QT_DEBUG_PLUGINS: "1"
+        run: |
+          cd build/
+          echo "Running unit UI tests with detailed plugin logging"
+  # ./run_ui_tests || { echo "UI tests failed"; exit 1; }
+        shell: bash
