@@ -14,16 +14,30 @@ QMutex *CarThread::getMutex()
 
 void CarThread::run()
 {
-    // while (_car->getPosition() < _raceTrack->getFinishLine())
-    // {
-        _mutex->lock(); // Acquire a lock before moving the car
+    while (true)
+    {
+        _mutex->lock();
         _car->move();
-        _mutex->unlock(); // Release the lock after moving the car
-        msleep(10); // Wait 10 milliseconds before moving again
-    // }
+        emit updatePosition(_car->getXPosition(), _car->getYPosition(), _car->getDirection());
+        _mutex->unlock();
+        msleep(10);
+    }
 }
 
-void CarThread::updatePosition( int speed, int dir )
+void CarThread::onAccelerate()
 {
-    
+    _mutex->lock();
+    int speed = _car->getSpeed();
+    _car->setSpeed(speed + 0.5);
+    _mutex->unlock(); 
+    msleep(10);
+}
+
+void CarThread::onBrake()
+{
+    _mutex->lock();
+    int speed = _car->getSpeed();
+    _car->setSpeed(speed - 0.5);
+    _mutex->unlock(); 
+    msleep(10);
 }

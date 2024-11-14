@@ -53,9 +53,10 @@ signals:
 
 private slots:
     void openGameWindow();
+    void updateGameWindow(int xPos, int yPos, int dir);
     void startRace();
     void pauseRace();
     void exitGame();
-    void unpauseRace();    
+    void unpauseRace();
 };
 #endif // RACINGGAME_H

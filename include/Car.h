@@ -27,6 +27,6 @@ class Car:  public QObject
         int getSpeed( void );
         int getDirection( void );
 
-    signals:
-        void positionChanged(int speed, int dir);
+    // signals:
+    //     void positionChanged(int speed, int dir);
 };
