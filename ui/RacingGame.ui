@@ -99,7 +99,16 @@
    <zorder>RaceTrack</zorder>
    <zorder>car1</zorder>
    <zorder>pushButton</zorder>
-   <zorder>car2</zorder>
+   <zorder>car2</zorder>   <widget class="QGraphicsView" name="graphicsView">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>801</width>
+      <height>601</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>
