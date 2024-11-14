@@ -6,25 +6,27 @@
 #include "RaceTrack.h"
 #include "Car.h"
 
-class CarThread : public QThread {
-
+class CarThread : public QThread 
+{
   Q_OBJECT
-  public:
+public:
 
-    CarThread(Car *car);
-    void run();
-    void setRaceTrack( RaceTrack raceT);
-    QMutex *getMutex();
+  CarThread(Car *car);
+  void run();
+  void setRaceTrack( RaceTrack *raceTrack);
+  QMutex *getMutex();
 
-  private:
-    Car *_car;
-    RaceTrack *_raceTrack;
-    QMutex *_mutex;
+private:
+  Car *_car;
+  RaceTrack *_raceTrack;
+  QMutex *_mutex;
 
-  public slots:
-    void updatePosition( int speed, int dir );
-    // void onAccelerate();
-    // void onBrake();
-    // void onTurnLeft();
-    // void onTurnRight();
+signals:
+  void updatePosition( double xPos, double yPos, double dir, const std::string& plate );
+
+public slots:
+  void onAccelerate(const std::string& plate);
+  void onBrake(const std::string& plate);
+  void onTurnLeft(const std::string& plate);
+  void onTurnRight(const std::string& plate);
 };

@@ -2,53 +2,73 @@
 #include "../include/Car.h"
 #include <math.h>
 
-Car::Car(QObject *parent) : _xPos(0), _yPos(0), _speed(0), _direction(0)
+Car::Car(const std::string& plate) : _xPos(0), _yPos(0), _speed(0), _direction(1), _plate(plate)
 {}
 
 Car::~Car()
 {}
 
-void Car::setPosition( int x, int y )
+void Car::setPosition( double x, double y )
 {
     _xPos = x;
     _yPos = y;
 }
 
-void Car::setSpeed ( int speed )
+void Car::setSpeed ( double speed )
 {
-    _speed = speed;
+    if (speed < 10 && speed > -10)
+        _speed = speed;
 }
 
-void Car::setDirection (int dir )
+void Car::setDirection (double dir )
 {
     _direction = dir;
 }
 
-int Car::getXPosition( void )
+double Car::getXPosition( void )
 {
-    return _xPos;
+    return this->_xPos;
 }
 
-int Car::getYPosition( void )
+double Car::getYPosition( void )
 {
-    return _yPos;
+    return this->_yPos;
 }
 
-int Car::getSpeed( void )
+double Car::getSpeed( void )
 {
-    return _speed;
+    return this->_speed;
 }
 
-int Car::getDirection( void )
+double Car::getDirection( void )
 {
-    return _direction;
+    return this->_direction;
 }
 
-void Car::move()
+const std::string& Car::getPlate( void )
 {
-    _xPos += _speed * cos(_direction * 3.14);
-    _yPos += _speed * sin(_direction * 3.14);
+    return this->_plate;
+}
 
+void Car::move(int width, int height)
+{
+    double radians = _direction * M_PI / 180.0;
+    double deltaX = cos(radians);
+    double deltaY = sin(radians);
 
-    emit positionChanged(_speed, _direction);
+    double tempX = _xPos; 
+    double tempY = _yPos;
+
+    _xPos += deltaX * _speed;
+    _yPos += deltaY * _speed;
+
+    if (_speed < 0)
+        _speed += 0.01;
+    else if (_speed > 0)
+        _speed -= 0.01;
+    
+    if (_xPos < 0 || _xPos > width)
+        _xPos = tempX;
+    if (_yPos < 0 || _yPos > height)
+        _yPos = tempY;
 }

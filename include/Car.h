@@ -1,32 +1,29 @@
 #pragma once
 
-#include <QObject>
+#include <iostream>
 
-class Car:  public QObject
+class Car
 {
-    Q_OBJECT
+private:
+    double _xPos;
+    double _yPos;
+    double _speed;
+    double _direction;
+    std::string _plate;
 
-    private:
-        int _xPos;
-        int _yPos;
-        int _speed;
-        int _direction;
+public:
+    Car(const std::string &plate);
+    ~Car();
+
+    void move(int width, int height);
     
-    public:
-        Car(QObject *parent = nullptr);
-        ~Car();
+    void setPosition( double x , double y );
+    void setSpeed ( double speed );
+    void setDirection (double dir );
 
-        void move();
-        
-        void setPosition( int x , int y );
-        void setSpeed ( int speed );
-        void setDirection (int dir );
-
-        int getXPosition( void );
-        int getYPosition( void );
-        int getSpeed( void );
-        int getDirection( void );
-
-    signals:
-        void positionChanged(int speed, int dir);
+    double getXPosition( void );
+    double getYPosition( void );
+    double getSpeed( void );
+    double getDirection( void );
+    const std::string& getPlate( void );
 };

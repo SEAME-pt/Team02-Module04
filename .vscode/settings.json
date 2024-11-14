@@ -3,6 +3,10 @@
     "qmainwindow": "cpp",
     "qgraphicsrotation": "cpp",
     "*.tcc": "cpp",
-    "fstream": "cpp"
+    "fstream": "cpp",
+    "qtransform": "cpp",
+    "qgraphicsscene": "cpp",
+    "new": "cpp",
+    "qlist": "cpp"
   }
 }

@@ -1,27 +1,66 @@
-#pragma once
+#ifndef RACINGGAME_H
+#define RACINGGAME_H
 
-#include <QList>
 #include <QMainWindow>
+#include <QLabel>
+#include <QTransform>
+#include <QGraphicsRotation>
+#include <QGraphicsWidget>
+#include <QGraphicsScene>
+#include <QGraphicsView>
+#include <QList>
 #include <QMutex>
+#include <QSet>
+#include <QKeyEvent>
 #include <QThread>
 #include "RaceTrack.h"
 #include "Car.h"
 #include "CarThread.h"
 
-class RacingGame : public QMainWindow {
-  public:
-  
-    RacingGame(QWidget *parent = 0);
-    
+QT_BEGIN_NAMESPACE
+namespace Ui {
+class RacingGame;
+}
+QT_END_NAMESPACE
 
-  private slots:
+class RacingGame : public QMainWindow
+{
+    Q_OBJECT
+
+public:
+    RacingGame(QWidget *parent = nullptr);
+    ~RacingGame();
+
+private:
+    Ui::RacingGame *ui;
+    QLabel *car1;
+    QLabel *car2;
+    QLabel *raceTrack;
+    QPixmap car1Pixmap;
+    QPixmap car2Pixmap;
+    QPixmap raceTrackPixmap;
+
+    QList<Car*> carList;
+    QList<QThread*> threadList;
+    RaceTrack *raceTrackPtr;
+    QSet<int> pressedKeys; // Add this line
+
+protected:
+    void keyPressEvent(QKeyEvent *event) override;
+    void keyReleaseEvent(QKeyEvent *event) override;
+
+signals:
+    void accelerate(const std::string& plate);
+    void deaccelerate(const std::string& plate);
+    void turnLeft(const std::string& plate);
+    void turnRight(const std::string& plate);
+
+private slots:
+    void openGameWindow();
+    void updateGameWindow(double xPos, double yPos, double dir, const std::string &plate);
     void startRace();
     void pauseRace();
     void exitGame();
     void unpauseRace();
-
-  private:
-    RaceTrack *raceTrack;
-    QList<Car*> carList;
-    QList<QThread*> threadList;
 };
+#endif // RACINGGAME_H

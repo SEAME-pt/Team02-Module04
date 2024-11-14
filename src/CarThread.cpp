@@ -1,10 +1,13 @@
 #include "../include/CarThread.h"
+#include <QDebug>
 
-CarThread::CarThread(Car *car): _car(car), QThread(car){}
-
-void CarThread::setRaceTrack( RaceTrack raceT)
+CarThread::CarThread(Car *car): _car(car), _mutex(new QMutex())
 {
-    _raceTrack = new RaceTrack();
+}
+
+void CarThread::setRaceTrack(RaceTrack *raceTrack)
+{
+    _raceTrack = raceTrack;
 }
 
 QMutex *CarThread::getMutex()
@@ -14,16 +17,58 @@ QMutex *CarThread::getMutex()
 
 void CarThread::run()
 {
-    // while (_car->getPosition() < _raceTrack->getFinishLine())
-    // {
-        _mutex->lock(); // Acquire a lock before moving the car
-        _car->move();
-        _mutex->unlock(); // Release the lock after moving the car
-        msleep(10); // Wait 10 milliseconds before moving again
-    // }
+    int width = this->_raceTrack->getWidth();
+    int height = this->_raceTrack->getHeight();
+    while (true)
+    {
+        _mutex->lock();
+        _car->move(width, height);
+        emit updatePosition(_car->getXPosition(), _car->getYPosition(), _car->getDirection(), _car->getPlate());
+        _mutex->unlock();
+        msleep(1);
+    }
 }
 
-void CarThread::updatePosition( int speed, int dir )
+void CarThread::onAccelerate(const std::string& plate)
 {
-    
+    _mutex->lock();
+    if (_car->getPlate() == plate)
+    {
+        int speed = _car->getSpeed() - 1;
+        _car->setSpeed(speed);
+    }
+    _mutex->unlock(); 
+}
+
+void CarThread::onBrake(const std::string& plate)
+{
+    _mutex->lock();
+    if (_car->getPlate() == plate)
+    {
+        int speed = _car->getSpeed() + 1;
+        _car->setSpeed(speed);
+    }
+    _mutex->unlock(); 
+}
+
+void CarThread::onTurnLeft(const std::string& plate)
+{
+    _mutex->lock();
+    if (_car->getPlate() == plate)
+    {
+        int dir = _car->getDirection();
+        _car->setDirection(dir - 4);
+    }
+    _mutex->unlock(); 
+}
+
+void CarThread::onTurnRight(const std::string& plate)
+{
+    _mutex->lock();
+    if (_car->getPlate() == plate)
+    {
+        int dir = _car->getDirection();
+        _car->setDirection(dir + 4);
+    }
+    _mutex->unlock(); 
 }

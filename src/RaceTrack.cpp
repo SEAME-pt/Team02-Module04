@@ -8,20 +8,42 @@ RaceTrack::RaceTrack()
 RaceTrack::~RaceTrack()
 {}
 
-void RaceTrack::setSize(int size)
+void RaceTrack::setWidth(int width)
 {
-    _size = size;
-}
-void RaceTrack::setFinishLine(int finishLine)
-{
-    _finishLine = finishLine;
-}
-int RaceTrack::getSize()
-{
-    return _size;
+    this->_width = width;
 }
 
-int RaceTrack::getFinishLine()
+void RaceTrack::setHeight(int height)
 {
-    return _finishLine;
+    this->_height = height;
+}
+
+void RaceTrack::setFinishLineX(int finishLineX)
+{
+    _finishLineX = finishLineX;
+}
+
+void RaceTrack::setFinishLineY(int finishLineY)
+{
+    _finishLineY = finishLineY;
+}
+
+int RaceTrack::getWidth() const
+{
+    return this->_width;
+}
+
+int RaceTrack::getHeight() const
+{
+    return this->_height;
+}
+
+int RaceTrack::getFinishLineX()
+{
+    return _finishLineX;
+}
+
+int RaceTrack::getFinishLineY()
+{
+    return _finishLineY;
 }
