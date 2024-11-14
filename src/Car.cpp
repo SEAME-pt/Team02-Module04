@@ -16,7 +16,8 @@ void Car::setPosition( int x, int y )
 
 void Car::setSpeed ( int speed )
 {
-    _speed = speed;
+    if (speed < 8 && speed > -8)
+        _speed = speed;
 }
 
 void Car::setDirection (int dir )
