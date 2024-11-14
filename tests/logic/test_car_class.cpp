@@ -52,8 +52,6 @@ TEST(moveFunctionTests, moveTest) {
     car.setDirection(2);
     car.move();
 
-    std::cout << car.getXPosition() << std::endl;
-    std::cout << car.getYPosition() << std::endl;
     EXPECT_EQ(car.getXPosition(), 3);
     EXPECT_EQ(car.getYPosition(), 2);
     EXPECT_EQ(spy.count(), 1);
