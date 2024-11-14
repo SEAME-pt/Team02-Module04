@@ -17,7 +17,7 @@
    <widget class="QLabel" name="RaceTrack">
     <property name="geometry">
      <rect>
-      <x>-20</x>
+      <x>0</x>
       <y>0</y>
       <width>821</width>
       <height>601</height>
@@ -45,13 +45,13 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>../../../Users/Rui Pires/Desktop/Race.jpg</pixmap>
+     <pixmap>assets/Race.jpg</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="car1">
     <property name="geometry">
      <rect>
       <x>490</x>
@@ -64,13 +64,13 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>../../../Users/Rui Pires/Desktop/SportCar.png</pixmap>
+     <pixmap>assets/SportCar.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="label_2">
+   <widget class="QLabel" name="car2">
     <property name="geometry">
      <rect>
       <x>440</x>
@@ -83,7 +83,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>../../../Users/Rui Pires/Desktop/SportCar.png</pixmap>
+     <pixmap>assets/SportCar.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
