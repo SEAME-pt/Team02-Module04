@@ -12,9 +12,11 @@ class CarThread : public QThread
 public:
 
   CarThread(Car *car);
-  void run();
+  void run( void );
   void setRaceTrack( RaceTrack *raceTrack);
-  QMutex *getMutex();
+  QMutex *getMutex( void );
+  Car *getCar( void );
+  RaceTrack *getRaceTrack( void );
 
 private:
   Car *_car;

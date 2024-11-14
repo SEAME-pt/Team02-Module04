@@ -15,11 +15,6 @@ QMutex *CarThread::getMutex()
     return _mutex;
 }
 
-Car *CarThread::getCar()
-{
-    return _car;
-}
-
 void CarThread::run()
 {
     int width = this->_raceTrack->getWidth();
@@ -62,11 +57,21 @@ void::CarThread::onTurnLeft()
     msleep(10);
 }
 
-void::CarThread::onTurnRight()
+void CarThread::onTurnRight()
 {
     _mutex->lock();
     int dir = _car->getDirection();
     _car->setDirection(dir + 2);
     _mutex->unlock(); 
     msleep(10);
+}
+
+Car *CarThread::getCar( void )
+{
+    return _car;
+}
+
+RaceTrack *CarThread::getRaceTrack( void )
+{
+    return _raceTrack;
 }

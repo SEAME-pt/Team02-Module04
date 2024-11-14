@@ -34,9 +34,7 @@ RacingGame::RacingGame(QWidget *parent)
 
 RacingGame::~RacingGame()
 {
-    
     delete ui;
-
 }
 
 void RacingGame::openGameWindow()
@@ -125,21 +123,26 @@ void RacingGame::updateGameWindow(int xPos, int yPos, int dir)
     car1->setPixmap(car1Pixmap.transformed(transform));
 }
 
-void RacingGame::updateGameWindow(int xPos, int yPos, int dir)
-{
-    QTransform transform;
-    car1->move(xPos, yPos);
-
-    transform.rotate(dir);
-    car1->setPixmap(car1Pixmap.transformed(transform));
-}
 
 void RacingGame::addToCarList(Car* car)
 {
     carList.append(car);
 }
 
-QList <QThread *>RacingGame::getThreadList()
+QList <QThread *> RacingGame::getThreadList()
 {
     return threadList;
 }
+
+// void RacingGame::moveAndRotateLabel()
+// {
+//     // Change the position of the QLabel
+//     int newX = 200; // New X position
+//     int newY = 200; // New Y position
+//     car1->move(newX, newY);
+
+//     // Rotate the QLabel
+//     QTransform transform;
+//     transform.rotate(45); // Rotate by 45 degrees
+//     car1->setPixmap(car1Pixmap.transformed(transform));
+// }

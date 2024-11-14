@@ -72,9 +72,11 @@ add_executable(run_tests
         src/RacingGame.cpp
         src/Car.cpp
         src/CarThread.cpp
+        src/RaceTrack.cpp
         include/Car.h
         include/CarThread.h
         include/RacingGame.h
+        include/RaceTrack.h
 )
 
 # Link Google Test and Google Test main libraries to the test executable

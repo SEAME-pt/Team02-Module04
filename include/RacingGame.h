@@ -54,9 +54,6 @@ signals:
     void turnLeft();
     void turnRight();
 
-public slots:
-
-
 protected slots:
     void openGameWindow();
     void updateGameWindow(int xPos, int yPos, int dir);

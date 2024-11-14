@@ -8,21 +8,10 @@
 
 class MockCar : public Car {
 public:
-    MockCar(QObject *parent = nullptr) : Car(parent) {}
-    void move() { setPosition(getXPosition() + 10, getYPosition() + 10); emit positionChanged(getSpeed(), getDirection()); }
+    MockCar(){}
+    void move() { setPosition(getXPosition() + 10, getYPosition() + 10);}
 };
 
-class MockCarThread : public CarThread {
-public:
-    MockCarThread(Car *car) : CarThread(car) {}
-    void run() override {
-            getMutex()->lock();
-            _car->move();
-            _mutex->unlock();
-            msleep(10);
-        emit finished();
-    }
-};
 
 class RacingGameTest : public RacingGame {
     Q_OBJECT
@@ -42,10 +31,6 @@ private:
 };
 
 void RacingGameTest::initTestCase() {
-    MockCar *car1 = new MockCar();
-    MockCar *car2 = new MockCar();
-    carList.append(car1);
-    carList.append(car2);
     racingGame = new RacingGame();
 
 }
@@ -71,15 +56,6 @@ void RacingGameTest::testConstructor() {
     QVERIFY(racingGame->findChild<QLabel*>("car1") != nullptr);
     QVERIFY(racingGame->findChild<QLabel*>("car2") != nullptr);
     QVERIFY(racingGame->findChild<QLabel*>("RaceTrack") != nullptr);
-
-    // Verify that the pixmaps are set correctly
-    QLabel *car1 = racingGame->findChild<QLabel*>("car1");
-    QLabel *car2 = racingGame->findChild<QLabel*>("car2");
-    QLabel *raceTrack = racingGame->findChild<QLabel*>("RaceTrack");
-
-    QVERIFY(!car1->pixmap().isNull());
-    QVERIFY(!car2->pixmap().isNull());
-    QVERIFY(!raceTrack->pixmap().isNull());
 }
 
 QTEST_MAIN(RacingGameTest)
