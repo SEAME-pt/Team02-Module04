@@ -1,6 +1,6 @@
 #include "../include/CarThread.h"
 
-CarThread::CarThread(Car *car): _car(car), QThread(car){}
+CarThread::CarThread(Car *car): _car(car), _mutex(new QMutex()) {}
 
 void CarThread::setRaceTrack( RaceTrack raceT)
 {

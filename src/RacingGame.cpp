@@ -25,7 +25,7 @@ RacingGame::RacingGame(QWidget *parent)
     carList.append(car11);
     carList.append(car22);
 
-    // this->startRace();
+    this->startRace();
     //example of a button connection to a slot (Object instance, in this case is a button, Signal from the object button, Object instance to connect, slot from the object to receive)
     // connect(ui->pushButton, &QPushButton::clicked, this, &RacingGame::openMenuWindow);
 }
@@ -63,17 +63,17 @@ void RacingGame::startRace()
 {
     foreach (Car *car, carList)
     {
-        QThread *thread = new QThread();
+        // QThread *thread = new QThread();
         CarThread *carThread = new CarThread(car);
-        carThread->moveToThread(thread);
+        // carThread->moveToThread(thread);
     
         connect(car, &Car::positionChanged, carThread, &CarThread::updatePosition);
-        connect(thread, &QThread::started, carThread, &CarThread::run);
-        connect(carThread, &CarThread::finished, thread, &QThread::quit);
+        // connect(thread, &QThread::started, carThread, &CarThread::run);
+        // connect(carThread, &CarThread::finished, thread, &QThread::quit);
         connect(carThread, &CarThread::finished, carThread, &CarThread::deleteLater);
-        connect(thread, &QThread::finished, thread, &QThread::deleteLater);
+        // connect(thread, &QThread::finished, thread, &QThread::deleteLater);
     
-        threadList.append(thread);
+        threadList.append(carThread);
         carThread->start();
     }
 }
