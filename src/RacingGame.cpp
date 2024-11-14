@@ -113,7 +113,6 @@ void RacingGame::updateGameWindow(int xPos, int yPos, int dir)
     QTransform transform;
     car1->move(xPos, yPos);
 
-    //std::cout << "X: " << xPos << " Y: " << yPos << " Dir: " << dir << std::endl;
     transform.rotate(dir);
     car1->setPixmap(car1Pixmap.transformed(transform));
 }

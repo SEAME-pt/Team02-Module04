@@ -41,3 +41,21 @@ void CarThread::onBrake()
     _mutex->unlock(); 
     msleep(10);
 }
+
+void::CarThread::onTurnLeft()
+{
+    _mutex->lock();
+    int dir = _car->getDirection();
+    _car->setDirection(dir - 1);
+    _mutex->unlock(); 
+    msleep(10);
+}
+
+void::CarThread::onTurnRight()
+{
+    _mutex->lock();
+    int dir = _car->getDirection();
+    _car->setDirection(dir + 1);
+    _mutex->unlock(); 
+    msleep(10);
+}
