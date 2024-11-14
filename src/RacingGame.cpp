@@ -1,5 +1,7 @@
 #include "../include/RacingGame.h"
 #include "../ui/ui_RacingGame.h"
+#include "../include/CarThread.h"
+#include <iostream>
 
 RacingGame::RacingGame(QWidget *parent)
     : QMainWindow(parent)
@@ -25,7 +27,7 @@ RacingGame::RacingGame(QWidget *parent)
     carList.append(car11);
     // carList.append(car22);
 
-    connect(ui->pushButton, &QPushButton::clicked, this, &RacingGame::openGameWindow);
+    //connect(ui->pushButton, &QPushButton::clicked, this, &RacingGame::accelerate);
     this->startRace();
     //example of a button connection to a slot (Object instance, in this case is a button, Signal from the object button, Object instance to connect, slot from the object to receive)
 }
@@ -76,6 +78,9 @@ void RacingGame::startRace()
     
         connect(this, &RacingGame::accelerate, carThread, &CarThread::onAccelerate);
         connect(this, &RacingGame::deaccelerate, carThread, &CarThread::onBrake);
+        connect(this, &RacingGame::turnRight, carThread, &CarThread::onTurnRight);
+        connect(this, &RacingGame::turnLeft, carThread, &CarThread::onTurnLeft);
+
         connect(carThread, &CarThread::updatePosition, this, &RacingGame::updateGameWindow);
         connect(carThread, &CarThread::finished, carThread, &CarThread::deleteLater);
     

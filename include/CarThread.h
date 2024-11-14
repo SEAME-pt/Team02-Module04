@@ -27,6 +27,6 @@ signals:
 public slots:
   void onAccelerate();
   void onBrake();
-  // void onTurnLeft();
-  // void onTurnRight();
+  void onTurnLeft();
+  void onTurnRight();
 };

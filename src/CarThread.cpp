@@ -33,7 +33,7 @@ void CarThread::run()
 void CarThread::onAccelerate()
 {
     _mutex->lock();
-    int speed = _car->getSpeed() + 1;
+    int speed = _car->getSpeed() - 1;
     _car->setSpeed(speed);
     _mutex->unlock(); 
     msleep(10);
@@ -42,8 +42,26 @@ void CarThread::onAccelerate()
 void CarThread::onBrake()
 {
     _mutex->lock();
-    int speed = _car->getSpeed() - 1;
+    int speed = _car->getSpeed() + 1;
     _car->setSpeed(speed);
+    _mutex->unlock(); 
+    msleep(10);
+}
+
+void::CarThread::onTurnLeft()
+{
+    _mutex->lock();
+    int dir = _car->getDirection();
+    _car->setDirection(dir - 2);
+    _mutex->unlock(); 
+    msleep(10);
+}
+
+void::CarThread::onTurnRight()
+{
+    _mutex->lock();
+    int dir = _car->getDirection();
+    _car->setDirection(dir + 2);
     _mutex->unlock(); 
     msleep(10);
 }

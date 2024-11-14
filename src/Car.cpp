@@ -47,6 +47,13 @@ int Car::getDirection( void )
 
 void Car::move()
 {
-    _xPos += _speed * cos(_direction * 3.14);
-    _yPos += _speed * sin(_direction * 3.14);
+    double radians = _direction * M_PI / 180.0;
+
+    double stepSize = 1.0;
+
+    // Apply the rotation matrix to calculate the new position
+    double deltaX = _speed * stepSize * cos(radians);
+    double deltaY = _speed * stepSize * sin(radians);
+    _xPos += deltaX;
+    _yPos += deltaY;
 }
