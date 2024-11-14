@@ -142,3 +142,14 @@ void RacingGame::updateGameWindow(double xPos, double yPos, double dir, const st
         car2->setPixmap(car2Pixmap.transformed(transform));
     }
 }
+
+void RacingGame::addToCarList(Car* car)
+{
+    carList.append(car);
+}
+
+
+QList <QThread *> RacingGame::getThreadList()
+{
+    return threadList;
+}

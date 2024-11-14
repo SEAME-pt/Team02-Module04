@@ -8,7 +8,7 @@
 
 class MockCar : public Car {
 public:
-    MockCar(){}
+    MockCar(const std::string &plate): Car(plate){}
     void move() { setPosition(getXPosition() + 10, getYPosition() + 10);}
 };
 
@@ -44,7 +44,6 @@ void RacingGameTest::cleanupTestCase() {
 }
 
 void RacingGameTest::testStartRace() {
-    startRace();
     QCOMPARE(getThreadList().size(), 2);
     for (QThread *thread : getThreadList()) {
         QVERIFY(thread->isRunning());
