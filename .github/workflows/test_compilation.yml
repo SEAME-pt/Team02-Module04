@@ -82,5 +82,5 @@ jobs:
         run: |
           cd build/
           echo "Running unit UI tests with detailed plugin logging"
-  # ./run_ui_tests || { echo "UI tests failed"; exit 1; }
+          ./run_ui_tests || { echo "UI tests failed"; exit 1; }
         shell: bash
