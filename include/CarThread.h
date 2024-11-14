@@ -22,11 +22,11 @@ private:
   QMutex *_mutex;
 
 signals:
-  void updatePosition( double xPos, double yPos, double dir );
+  void updatePosition( double xPos, double yPos, double dir, const std::string& plate );
 
 public slots:
-  void onAccelerate();
-  void onBrake();
-  void onTurnLeft();
-  void onTurnRight();
+  void onAccelerate(const std::string& plate);
+  void onBrake(const std::string& plate);
+  void onTurnLeft(const std::string& plate);
+  void onTurnRight(const std::string& plate);
 };

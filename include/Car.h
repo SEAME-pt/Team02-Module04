@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+
 class Car
 {
 private:
@@ -7,9 +9,10 @@ private:
     double _yPos;
     double _speed;
     double _direction;
+    std::string _plate;
 
 public:
-    Car();
+    Car(const std::string &plate);
     ~Car();
 
     void move();
@@ -22,4 +25,5 @@ public:
     double getYPosition( void );
     double getSpeed( void );
     double getDirection( void );
+    const std::string& getPlate( void );
 };

@@ -21,15 +21,15 @@ RacingGame::RacingGame(QWidget *parent)
     raceTrackPixmap = QPixmap(":/ui/assets/Race.jpg");
     raceTrack->setPixmap(raceTrackPixmap);
 
-    Car* car11 = new Car;
-    // Car* car22 = new Car;
+    Car* carA = new Car("a");
+    Car* carB = new Car("b");
 
-    carList.append(car11);
-    // carList.append(car22);
+    carList.append(carA);
+    carList.append(carB);
 
-    //connect(ui->pushButton, &QPushButton::clicked, this, &RacingGame::accelerate);
     this->startRace();
     //example of a button connection to a slot (Object instance, in this case is a button, Signal from the object button, Object instance to connect, slot from the object to receive)
+    //connect(ui->pushButton, &QPushButton::clicked, this, &RacingGame::accelerate);
 }
 
 RacingGame::~RacingGame()
@@ -39,23 +39,34 @@ RacingGame::~RacingGame()
 
 void RacingGame::openGameWindow()
 {
-    emit accelerate();
 }
 
 void RacingGame::keyPressEvent(QKeyEvent *event)
 {
     switch (event->key()) {
         case Qt::Key_W:
-            emit accelerate();
+            emit accelerate("a");
             break;
         case Qt::Key_S:
-            emit deaccelerate();
+            emit deaccelerate("a");
             break;
         case Qt::Key_A:
-            emit turnLeft();
+            emit turnLeft("a");
             break;
         case Qt::Key_D:
-            emit turnRight();
+            emit turnRight("a");
+            break;
+        case Qt::Key_I:
+            emit accelerate("b");
+            break;
+        case Qt::Key_K:
+            emit deaccelerate("b");
+            break;
+        case Qt::Key_J:
+            emit turnLeft("b");
+            break;
+        case Qt::Key_L:
+            emit turnRight("b");
             break;
         default:
             QMainWindow::keyPressEvent(event);
@@ -114,24 +125,18 @@ void RacingGame::exitGame()
     }
 }
 
-void RacingGame::updateGameWindow(double xPos, double yPos, double dir)
+void RacingGame::updateGameWindow(double xPos, double yPos, double dir, const std::string &plate)
 {
     QTransform transform;
-    car1->move(xPos, yPos);
-
     transform.rotate(dir);
-    car1->setPixmap(car1Pixmap.transformed(transform));
+    if (plate == "a")
+    {
+        car1->move(xPos, yPos);
+        car1->setPixmap(car1Pixmap.transformed(transform));
+    }
+    else
+    {
+        car2->move(xPos, yPos);
+        car2->setPixmap(car2Pixmap.transformed(transform));
+    }
 }
-
-// void RacingGame::moveAndRotateLabel()
-// {
-//     // Change the position of the QLabel
-//     int newX = 200; // New X position
-//     int newY = 200; // New Y position
-//     car1->move(newX, newY);
-
-//     // Rotate the QLabel
-//     QTransform transform;
-//     transform.rotate(45); // Rotate by 45 degrees
-//     car1->setPixmap(car1Pixmap.transformed(transform));
-// }

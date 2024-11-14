@@ -2,7 +2,7 @@
 #include "../include/Car.h"
 #include <math.h>
 
-Car::Car() : _xPos(0), _yPos(0), _speed(0), _direction(1)
+Car::Car(const std::string& plate) : _xPos(0), _yPos(0), _speed(0), _direction(1), _plate(plate)
 {}
 
 Car::~Car()
@@ -27,22 +27,27 @@ void Car::setDirection (double dir )
 
 double Car::getXPosition( void )
 {
-    return _xPos;
+    return this->_xPos;
 }
 
 double Car::getYPosition( void )
 {
-    return _yPos;
+    return this->_yPos;
 }
 
 double Car::getSpeed( void )
 {
-    return _speed;
+    return this->_speed;
 }
 
 double Car::getDirection( void )
 {
-    return _direction;
+    return this->_direction;
+}
+
+const std::string& Car::getPlate( void )
+{
+    return this->_plate;
 }
 
 void Car::move()
