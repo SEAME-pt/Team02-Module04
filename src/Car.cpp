@@ -2,58 +2,70 @@
 #include "../include/Car.h"
 #include <math.h>
 
-Car::Car() : _xPos(0), _yPos(0), _speed(0), _direction(1)
+Car::Car(const std::string& plate) : _xPos(0), _yPos(0), _speed(0), _direction(1), _plate(plate)
 {}
 
 Car::~Car()
 {}
 
-void Car::setPosition( int x, int y )
+void Car::setPosition( double x, double y )
 {
     _xPos = x;
     _yPos = y;
 }
 
-void Car::setSpeed ( int speed )
+void Car::setSpeed ( double speed )
 {
-    if (speed < 8 && speed > -8)
+    if (speed < 10 && speed > -10)
         _speed = speed;
 }
 
-void Car::setDirection (int dir )
+void Car::setDirection (double dir )
 {
     _direction = dir;
 }
 
-int Car::getXPosition( void )
+double Car::getXPosition( void )
 {
-    return _xPos;
+    return this->_xPos;
 }
 
-int Car::getYPosition( void )
+double Car::getYPosition( void )
 {
-    return _yPos;
+    return this->_yPos;
 }
 
-int Car::getSpeed( void )
+double Car::getSpeed( void )
 {
-    return _speed;
+    return this->_speed;
 }
 
-int Car::getDirection( void )
+double Car::getDirection( void )
 {
-    return _direction;
+    return this->_direction;
 }
 
-void Car::move()
+const std::string& Car::getPlate( void )
+{
+    return this->_plate;
+}
+
+void Car::move(int width, int height)
 {
     double radians = _direction * M_PI / 180.0;
+    double deltaX = cos(radians);
+    double deltaY = sin(radians);
 
-    double stepSize = 1.0;
+    double tempX = _xPos + deltaX * _speed;
+    double tempY = _yPos + deltaY * _speed;
 
-    // Apply the rotation matrix to calculate the new position
-    double deltaX = _speed * stepSize * cos(radians);
-    double deltaY = _speed * stepSize * sin(radians);
-    _xPos += deltaX;
-    _yPos += deltaY;
+    if (_speed < 0)
+        _speed += 0.01;
+    else if (_speed > 0)
+        _speed -= 0.01;
+    
+    if (tempX > 0 && tempX < width)
+        _xPos = tempX;
+    if (tempY > 0 && tempY < height)
+        _yPos = tempY;
 }

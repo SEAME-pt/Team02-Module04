@@ -22,46 +22,54 @@ void CarThread::run()
     while (true)
     {
         _mutex->lock();
-        // if (_car->getXPosition() + 100 < width  && _car->getYPosition() < height)
-        _car->move();
-        emit updatePosition(_car->getXPosition(), _car->getYPosition(), _car->getDirection());
+        _car->move(width, height);
+        emit updatePosition(_car->getXPosition(), _car->getYPosition(), _car->getDirection(), _car->getPlate());
         _mutex->unlock();
-        msleep(10);
+        msleep(1);
     }
 }
 
-void CarThread::onAccelerate()
+void CarThread::onAccelerate(const std::string& plate)
 {
     _mutex->lock();
-    int speed = _car->getSpeed() - 1;
-    _car->setSpeed(speed);
+    if (_car->getPlate() == plate)
+    {
+        int speed = _car->getSpeed() - 1;
+        _car->setSpeed(speed);
+    }
     _mutex->unlock(); 
-    msleep(10);
 }
 
-void CarThread::onBrake()
+void CarThread::onBrake(const std::string& plate)
 {
     _mutex->lock();
-    int speed = _car->getSpeed() + 1;
-    _car->setSpeed(speed);
+    if (_car->getPlate() == plate)
+    {
+        int speed = _car->getSpeed() + 1;
+        _car->setSpeed(speed);
+    }
     _mutex->unlock(); 
-    msleep(10);
 }
 
-void::CarThread::onTurnLeft()
+void::CarThread::onTurnLeft(const std::string& plate)
 {
     _mutex->lock();
-    int dir = _car->getDirection();
-    _car->setDirection(dir - 2);
+    if (_car->getPlate() == plate)
+    {
+        int dir = _car->getDirection();
+        _car->setDirection(dir - 4);
+    }
     _mutex->unlock(); 
-    msleep(10);
 }
 
-void CarThread::onTurnRight()
+void CarThread::onTurnRight(const std::string& plate)
 {
     _mutex->lock();
-    int dir = _car->getDirection();
-    _car->setDirection(dir + 2);
+    if (_car->getPlate() == plate)
+    {
+        int dir = _car->getDirection();
+        _car->setDirection(dir + 4);
+    }
     _mutex->unlock(); 
     msleep(10);
 }

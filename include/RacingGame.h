@@ -49,14 +49,14 @@ protected:
     void keyPressEvent(QKeyEvent *event) override;
 
 signals:
-    void accelerate();
-    void deaccelerate();
-    void turnLeft();
-    void turnRight();
+    void accelerate(const std::string& plate);
+    void deaccelerate(const std::string& plate);
+    void turnLeft(const std::string& plate);
+    void turnRight(const std::string& plate);
 
 protected slots:
     void openGameWindow();
-    void updateGameWindow(int xPos, int yPos, int dir);
+    void updateGameWindow(double xPos, double yPos, double dir, const std::string &plate);
     void startRace();
     void pauseRace();
     void exitGame();

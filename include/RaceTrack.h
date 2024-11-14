@@ -7,7 +7,8 @@ class RaceTrack
     private:
         int _width;
         int _height;
-        int _finishLine;
+        int _finishLineX;
+        int _finishLineY;
 
     public:
         RaceTrack();
@@ -15,9 +16,11 @@ class RaceTrack
 
         void setWidth(int width);
         void setHeight(int height);
-        void setFinishLine(int finishLine);
+        void setFinishLineX(int finishLineX);
+        void setFinishLineY(int finishLineY);
 
         int getWidth() const;
         int getHeight() const;
-        int getFinishLine();
+        int getFinishLineX();
+        int getFinishLineY();
 };
