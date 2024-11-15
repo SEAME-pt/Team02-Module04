@@ -18,7 +18,7 @@ body:
     validations:
       required: true
 
-  - type: input
+  - type: textarea
     id: epic_reference
     attributes:
       label: Epic Reference
