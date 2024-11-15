@@ -83,23 +83,20 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="pauseButton">
     <property name="geometry">
      <rect>
-      <x>140</x>
-      <y>530</y>
-      <width>75</width>
-      <height>24</height>
+      <x>340</x>
+      <y>10</y>
+      <width>101</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="text">
      <string>Pause</string>
     </property>
    </widget>
-   <zorder>RaceTrack</zorder>
-   <zorder>car1</zorder>
-   <zorder>pushButton</zorder>
-   <zorder>car2</zorder>   <widget class="QGraphicsView" name="graphicsView">
+   <widget class="QGraphicsView" name="graphicsView">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -109,6 +106,11 @@
      </rect>
     </property>
    </widget>
+   <zorder>graphicsView</zorder>
+   <zorder>RaceTrack</zorder>
+   <zorder>car1</zorder>
+   <zorder>pauseButton</zorder>
+   <zorder>car2</zorder>
   </widget>
  </widget>
  <resources/>

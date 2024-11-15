@@ -8,5 +8,6 @@ int main(int argc, char *argv[])
     RacingGame w;
 
     w.show();
+    w.pauseRace();
     return a.exec();
 }

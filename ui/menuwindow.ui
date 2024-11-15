@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Dialog</class>
- <widget class="QDialog" name="Dialog">
+ <class>menuwindow</class>
+ <widget class="QDialog" name="menuwindow">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>674</width>
-    <height>412</height>
+    <height>392</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Menu</string>
   </property>
   <property name="windowOpacity">
-   <double>-2.600000000000000</double>
+   <double>0.800000000000000</double>
   </property>
   <property name="autoFillBackground">
    <bool>false</bool>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgba(0, 0, 0, 200);  /* Replace (0, 0, 0) with your desired color */
+   <string notr="true">background-color: rgba(255, 255, 255, 0.6);  /* Replace (0, 0, 0) with your desired color */
 </string>
   </property>
   <property name="modal">
    <bool>false</bool>
   </property>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="startButton">
    <property name="geometry">
     <rect>
      <x>270</x>
-     <y>180</y>
+     <y>170</y>
      <width>101</width>
      <height>41</height>
     </rect>
@@ -39,7 +39,7 @@
     <string>Resume</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="exitButton">
    <property name="geometry">
     <rect>
      <x>270</x>

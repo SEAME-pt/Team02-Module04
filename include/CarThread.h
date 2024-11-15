@@ -31,4 +31,6 @@ public slots:
   void onBrake(const std::string& plate);
   void onTurnLeft(const std::string& plate);
   void onTurnRight(const std::string& plate);
+  void pauseThreads();
+  void unpauseThreads();
 };

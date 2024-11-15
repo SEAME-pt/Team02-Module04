@@ -83,3 +83,13 @@ RaceTrack *CarThread::getRaceTrack( void )
 {
     return _raceTrack;
 }
+
+void CarThread::pauseThreads()
+{
+    _mutex->lock();
+}
+
+void CarThread::unpauseThreads()
+{
+    _mutex->unlock();
+}

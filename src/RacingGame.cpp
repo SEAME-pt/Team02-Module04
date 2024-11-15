@@ -9,6 +9,14 @@ RacingGame::RacingGame(QWidget *parent)
 {
     ui->setupUi(this);
 
+    pauseMenu = new QDialog(this);
+    uiPause = new Ui::menuwindow;
+    uiPause->setupUi(pauseMenu);
+
+    connect(uiPause->startButton, &QPushButton::clicked, this, &RacingGame::unpauseRace);
+    connect(uiPause->exitButton, &QPushButton::clicked, this,&RacingGame::exitGame);
+    connect(ui->pauseButton, &QPushButton::clicked, this, &RacingGame::pauseRace);
+    
     QPixmap raceTrackPixmap(":/ui/assets/Race.jpg");
     QPixmap scaledTrack = raceTrackPixmap.scaled(ui->graphicsView->size(), Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation);
 
@@ -45,6 +53,8 @@ RacingGame::RacingGame(QWidget *parent)
 
 RacingGame::~RacingGame()
 {
+    threadList[0]->terminate();
+    threadList[1]->terminate();
     delete ui;
 }
 
@@ -139,6 +149,8 @@ void RacingGame::startRace()
         connect(this, &RacingGame::deaccelerate, carThread, &CarThread::onBrake);
         connect(this, &RacingGame::turnRight, carThread, &CarThread::onTurnRight);
         connect(this, &RacingGame::turnLeft, carThread, &CarThread::onTurnLeft);
+        connect(this, &RacingGame::stopAll, carThread, &CarThread::pauseThreads);
+        connect(this, &RacingGame::startAll, carThread, &CarThread::unpauseThreads);
 
         connect(carThread, &CarThread::updatePosition, this, &RacingGame::updateGameWindow);
         connect(carThread, &CarThread::finished, carThread, &CarThread::deleteLater);
@@ -147,30 +159,28 @@ void RacingGame::startRace()
         carThread->setRaceTrack(raceTrack);
         carThread->start();
     }
+
 }
 
 void RacingGame::pauseRace()
 {
-    foreach (QThread *thread , threadList)
-    {
-        thread->findChild<CarThread *>()->getMutex()->lock();
-    }
+
+    // Create and show the MenuWindow without borders
+    emit stopAll();
+    pauseMenu->setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint); // Ensure the window is deleted when closed
+    pauseMenu->exec(); // Use exec() for modal dialog
 }
 
 void RacingGame::unpauseRace()
 {
-    foreach (QThread *thread , threadList)
-    {
-        thread->findChild<CarThread *>()->getMutex()->unlock();
-    }
+    emit startAll();
+    pauseMenu->close();
 }
     
 void RacingGame::exitGame()
 {
-    foreach (QThread *thread , threadList)
-    {
-        delete (thread->findChild<CarThread *>()->getMutex());
-    }
+    pauseMenu->close();
+    this->close();
 }
 
 void RacingGame::updateGameWindow(double xPos, double yPos, double dir, const std::string &plate)
@@ -187,3 +197,12 @@ void RacingGame::updateGameWindow(double xPos, double yPos, double dir, const st
     }
 }
 
+void RacingGame::addToCarList(Car* car)
+{
+    carList.append(car);
+}
+
+QList <QThread *>RacingGame::getThreadList()
+{
+    return threadList;
+}
