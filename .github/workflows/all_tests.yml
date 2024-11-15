@@ -67,9 +67,11 @@ jobs:
           echo "Permissions set for test executables in build/"
 
       - name: BackEnd Logic Unit Tests
+        env:
+          DISPLAY: ":99"
         run: |
           cd build/
-          echo "Running unit logic tests"
+          echo "Running unit logic tests with UI support"
           ./run_tests || { echo "Logic tests failed"; exit 1; }
         shell: bash
         continue-on-error: false
@@ -81,8 +83,6 @@ jobs:
         run: |
           cd build/
           echo "Running unit UI tests with detailed info"
-        # ./run_ui_tests || { echo "UI tests failed"; exit 1; }
+          # Uncomment this line when the UI test executable is ready
+          # ./run_ui_tests || { echo "UI tests failed"; exit 1; }
         shell: bash
-
-# remove that comment when the test file executable is created
-
