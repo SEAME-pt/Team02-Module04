@@ -57,7 +57,7 @@ protected:
     QList<Car*> carList;
     QList<QThread *> threadList;
     RaceTrack *raceTrackPtr;
-    QSet<int> pressedKeys; // Add this line
+    QSet<int> pressedKeys;
 
 protected:
     void keyPressEvent(QKeyEvent *event) override;
@@ -81,4 +81,4 @@ public slots:
     void pauseRace();
     void unpauseRace();
 };
-#endif // RACINGGAME_H
+#endif

@@ -35,12 +35,14 @@ RacingGame::RacingGame(QWidget *parent)
     QPixmap scaledCar1 = car1Pixmap.scaled(CAR_WIDTH, CAR_HEIGHT, Qt::KeepAspectRatio, Qt::SmoothTransformation);
     car1 = new QGraphicsPixmapItem(scaledCar1);
     car1->setPos(CAR1_INITIAL_X, CAR1_INITIAL_Y);
+    car1->setTransformOriginPoint(car1->boundingRect().center());
     scene->addItem(car1);
 
     QPixmap car2Pixmap(":/ui/assets/SportCar.png");
     QPixmap scaledCar2 = car2Pixmap.scaled(CAR_WIDTH, CAR_HEIGHT, Qt::KeepAspectRatio, Qt::SmoothTransformation);
     car2 = new QGraphicsPixmapItem(scaledCar2);
     car2->setPos(CAR2_INITIAL_X, CAR2_INITIAL_Y);
+    car2->setTransformOriginPoint(car1->boundingRect().center());
     scene->addItem(car2);
 
     Car* carA = new Car("a");
@@ -62,41 +64,9 @@ void RacingGame::openGameWindow()
 {
 }
 
-// void RacingGame::keyPressEvent(QKeyEvent *event)
-// {
-//     switch (event->key()) {
-//         case Qt::Key_W:
-//             emit accelerate("a");
-//             break;
-//         case Qt::Key_S:
-//             emit deaccelerate("a");
-//             break;
-//         case Qt::Key_A:
-//             emit turnLeft("a");
-//             break;
-//         case Qt::Key_D:
-//             emit turnRight("a");
-//             break;
-//         case Qt::Key_I:
-//             emit accelerate("b");
-//             break;
-//         case Qt::Key_K:
-//             emit deaccelerate("b");
-//             break;
-//         case Qt::Key_J:
-//             emit turnLeft("b");
-//             break;
-//         case Qt::Key_L:
-//             emit turnRight("b");
-//             break;
-//         default:
-//             QMainWindow::keyPressEvent(event);
-//     }
-// }
-
 void RacingGame::keyPressEvent(QKeyEvent *event)
 {
-    pressedKeys.insert(event->key()); // Add the key to the set of pressed keys
+    pressedKeys.insert(event->key());
 
     if (pressedKeys.contains(Qt::Key_W)) {
         emit accelerate("a");
@@ -164,11 +134,10 @@ void RacingGame::startRace()
 
 void RacingGame::pauseRace()
 {
-
     // Create and show the MenuWindow without borders
     emit stopAll();
-    pauseMenu->setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint); // Ensure the window is deleted when closed
-    pauseMenu->exec(); // Use exec() for modal dialog
+    pauseMenu->setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint);
+    pauseMenu->exec();
 }
 
 void RacingGame::unpauseRace()
