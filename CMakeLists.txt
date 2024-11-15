@@ -38,6 +38,7 @@ set(PROJECT_HEADERS
 
 set(PROJECT_UI
         ui/RacingGame.ui
+        ui/menuwindow.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -79,6 +80,7 @@ add_executable(run_tests
         include/CarThread.h
         include/RacingGame.h
         include/RaceTrack.h
+
 )
 
 # Link Google Test and Google Test main libraries to the test executable

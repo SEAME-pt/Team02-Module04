@@ -13,8 +13,10 @@
 #include <QSet>
 #include <QKeyEvent>
 #include <QThread>
+#include <QDialog>
 #include "RaceTrack.h"
 #include "Car.h"
+#include "../ui/ui_menuwindow.h"
 
 #define CAR_WIDTH 100
 #define CAR_HEIGHT 150
@@ -48,10 +50,12 @@ private:
     QPixmap car1Pixmap;
     QPixmap car2Pixmap;
     QPixmap raceTrackPixmap;
+    QDialog *pauseMenu;
+    Ui::menuwindow *uiPause;
 
 protected:
     QList<Car*> carList;
-    QList<QThread*> threadList;
+    QList<QThread *> threadList;
     RaceTrack *raceTrackPtr;
     QSet<int> pressedKeys; // Add this line
 
@@ -64,13 +68,17 @@ signals:
     void deaccelerate(const std::string& plate);
     void turnLeft(const std::string& plate);
     void turnRight(const std::string& plate);
+    void stopAll();
+    void startAll();
 
 protected slots:
     void openGameWindow();
     void updateGameWindow(double xPos, double yPos, double dir, const std::string &plate);
     void startRace();
-    void pauseRace();
     void exitGame();
+
+public slots:
+    void pauseRace();
     void unpauseRace();
 };
 #endif // RACINGGAME_H
