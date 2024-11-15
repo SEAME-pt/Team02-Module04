@@ -68,7 +68,7 @@ jobs:
 
       - name: BackEnd Logic Unit Tests
         env:
-          DISPLAY: ":99"  # Set DISPLAY environment variable for Xvfb
+          DISPLAY: ":99"
         run: |
           cd build/
           echo "Running unit logic tests with UI support"
